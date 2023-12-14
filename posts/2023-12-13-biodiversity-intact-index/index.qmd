@@ -1,0 +1,229 @@
+---
+title: "EDS 220 - Biodiversity Intact Index"
+description: "A geographic assesment of biodiversity in the Phoenix Subdivision, utilizing the biodiversity intactness index (BII).All work can be found in my Github Repository: https://github.com/Vanessa-Salgado/Biodiveristy_Intact_Index "
+author:
+  - name: Vanessa Salgado
+    url: https://www.linkedin.com/in/Vanessa-Salgado/
+    orcid: 0000-0002-5300-3075
+    affiliation: Master of Environmental Data Science Program @ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis
+    affiliation-url: https://ucsb-meds.github.io/ 
+date: 12-13-2023
+categories: [Python, Environmental, Datasets] # self-defined categories
+citation: 
+  url: https://samanthacsik.github.io/posts/2022-10-24-my-blog-post/ 
+image: preview-image.png
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+jupyter: python3
+---
+
+# Background 
+
+Between 2001 and 2019, Maricopa County, located in the Phoenix metropolitan area of Arizona, added over 270 miles of developed land. This includes buildings, roads, and other structures which have the potential to disturb and negatively impact biodiversity in surrounding areas. Measures of biodiversity, such as the biodiversity intactness index (BII), are crucial for creating conservation and restoration plans. Global raster data on BII from 2017 to 2020 was produced and published by Impact Observatory. This analysis combines BII data from Impact Observity as U.S. Census shapefile data to analyze changes in BII between 2017 and 2020.
+
+# Data Access and Information
+
+1. **BII data**: This dataset is part of the MPC STAC catalog. The data in question is the ‘io-biodiversity’ collection and look for the 2017 and 2020 rasters covering Phoenix subdivision. The coordinates that correspond to Phoenix are: 
+[-112.826843, 32.974108, -111.184387, 33.863574]
+
+2. **Phoenix subdivision**: You will find the Phoenix subdivision polygon in the Census County Subdivision shapefiles for Arizona: https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2022&layergroup=County+Subdivisions
+
+# Project Setup
+
+## Import Libraries
+
+```{python}
+import numpy as np
+import geopandas as gpd
+import rioxarray as rioxr
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches 
+
+from shapely.geometry import Polygon
+from rasterio.features import rasterize
+
+# used to access STAC catalogs
+from pystac_client import Client
+# used to sign items from the MPC STAC catalog
+import planetary_computer
+
+# ----- other libraries for nice ouputs
+from IPython.display import Image
+
+import os
+import contextily as cx
+```
+
+# Loading Data
+
+**1. Loading Dataa from MPC STAC catalog**
+
+```{python}
+# access mpc catalog
+catalog = Client.open(
+    "https://planetarycomputer.microsoft.com/api/stac/v1",
+    modifier=planetary_computer.sign_inplace,)
+
+# store bounding box
+bbox = [-112.826843, 32.974108, -111.184387, 33.863574]
+
+# search for bii data for area of interest
+search = catalog.search(
+    collections = ['io-biodiversity'],
+    bbox = bbox,
+    datetime = '2017/2020')
+
+# retrieve items from search
+items = search.item_collection()
+
+# store items for years of interest
+item_2020 = items[0]
+item_2017 = items[3]
+```
+
+```{python}
+# view item assets
+for key in item_2017.assets.keys():
+    print(key, '--', item_2017.assets[key].title)
+```
+
+```{python}
+# Read in bii rasters (squeeze and drop extra coords)
+bii_2017_rast = rioxr.open_rasterio(item_2017.assets['data'].href).squeeze().drop('band')
+bii_2020_rast = rioxr.open_rasterio(item_2020.assets['data'].href).squeeze().drop('band')
+```
+
+**2. Phoenix subdivision: You will find the Phoenix subdivision polygon in the Census County Subdivision shapefiles for Arizona:** 
+
+```{python}
+az = gpd.read_file("/Users/vanessa/Documents/dev_projects/tl_2022_04_cousub")
+phx = az[az.NAME == 'Phoenix']
+```
+
+# Map of Phoenix Subdivision
+Here is a map showing the Phoenix subdivision within an appropriate geographical context. You may use any vector datasets to create your map. 
+
+```{python}
+fig, ax = plt.subplots() #create figure
+
+phx.to_crs(epsg=3857).plot(ax=ax, figsize = (12,8), alpha = 0.3, #plot phoenix
+                          edgecolor='k', color='c')
+
+cx.add_basemap(ax, source=cx.providers.Esri.NatGeoWorldMap) # add basemap
+
+# update title and axes
+ax.set_title("Phoenix Census Subdivision", fontdict={"fontsize": "16"})
+ax.set_axis_off()
+#plt.savefig('images/phoenix-census-subdivision.png')
+```
+
+# Assessing Biodiveristy Loss  
+
+DirectCalculate the percentage of area of the Phoenix subdivision with a BII of at least 0.75 in 2017. Obtain the same calculation for 2020.
+
+## Percentage of Area
+
+The original raster is larger than the Phoenix subdivision, and needs to be cropped and reprojected before percentages can be calculated.
+
+#### Data Preparation 
+
+```{python}
+# Re-project so bii and phx have the same CRS
+phx = phx.to_crs(bii_2017_rast.rio.crs)
+
+# Crop raster using phx
+bii_2017_rast = bii_2017_rast.rio.clip(phx['geometry'])
+bii_2020_rast = bii_2020_rast.rio.clip(phx['geometry'])
+```
+#### Percetange of Area in 2017:
+
+```{python}
+# find areas where bii is >= 0.75
+high_bii_2017 = (bii_2017_rast >= 0.75)
+
+# Convert T/F to 0/1 int
+high_bii_2017 = high_bii_2017.astype(int)
+
+# Calculate percent
+bii_pcnt_2017 = (high_bii_2017.sum().item() / bii_2017_rast.count().item()) * 100
+
+# Print percent area
+print(f'Percentage of Area with BII >= 75% in 2017: {round(bii_pcnt_2017, 2)} %')
+```
+
+#### Percentage of Area in 2020
+
+```{python}
+## ==== Repeat workflow for 2020 bii ====
+# find areas where bii is >= 0.75
+high_bii_2020 = (bii_2020_rast >= 0.75)
+
+# Convert T/F to 0/1 int
+high_bii_2020 = high_bii_2020.astype(int)
+
+# Calculate percent
+bii_pcnt_2020 = (high_bii_2020.sum().item() / bii_2020_rast.count().item()) * 100
+
+# Print percent area
+print(f'Percentage of Area with BII >= 75% in 2017: {round(bii_pcnt_2020, 2)} %')
+```
+
+#### Analysis
+
+[]
+
+# Visualization of Biodiversity Intact Index
+
+Create a visualization showing the area with BII>=0.75 in 2017 that was lost by 2020.
+
+Cropping BII data to Phoenix subdivision:
+
+```{python}
+# create mask of Phoenix subdivision
+mask = rasterize(shapes = [phx.loc[10,'geometry']],
+                out_shape = bii_2020_rast.shape,
+                transform = bii_2020_rast.rio.transform(),
+                all_touched = True)
+
+# apply mask over 2020 BII raster and clip
+bii_phx_2020 = bii_2020_rast * mask
+bii_phx_2020 = bii_phx_2020.rio.clip([phx.loc[10,'geometry']])
+```
+
+Find areas that fell under 0.75 BII from 2017 to 2020:
+
+```{python}
+# Find the difference in BII between 2017 and 2020
+bii_diff = high_bii_2017 - high_bii_2020
+
+# select values of 1 (where BII dropped below 0.75 from 2017 to 2020)
+bii_diff = bii_diff.where(bii_diff == 1.0)
+
+# crop diff raster to Phoenix
+bii = bii_diff * mask
+bii = bii.rio.clip([phx.loc[10,'geometry']])
+```
+
+```{python}
+# create empty figure
+fig, ax = plt.subplots(figsize = (6,6))
+
+# remove axis
+ax.axis('off')
+
+# plot BII from 2020
+bii_phx_2020.plot(ax=ax, cmap = 'Greens',
+                  cbar_kwargs={"location": "bottom",
+                               'label': "2020 BII"})
+
+
+# plot BII difference areas
+bii.plot(ax=ax, cmap='gist_heat', add_colorbar = False)
+patch = mpatches.Patch(color = '#B00005',
+                      label = 'Area with BII ≥ 0.75 lost from 2017 to 2020')
+# add title
+ax.set_title('Biodiversity Intactness Index (BII) - Phoenix Subdivision')
+
+_ = ax.legend(handles = [patch], loc='lower center', frameon=False,
+         bbox_to_anchor=(0.5,-0.2))
+```
+

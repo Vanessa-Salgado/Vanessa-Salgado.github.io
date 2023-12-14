@@ -1,0 +1,11 @@
+{
+  "hash": "a105229c189366c5632b466a7e29af0d",
+  "result": {
+    "markdown": "---\ntitle: EDS 220 - Biodiversity Intact Index\ndescription: 'A geographic assesment of biodiversity in the Phoenix Subdivision, utilizing the biodiversity intactness index (BII).All work can be found in my Github Repository: https://github.com/Vanessa-Salgado/Biodiveristy_Intact_Index '\nauthor:\n  - name: Vanessa Salgado\n    url: 'https://www.linkedin.com/in/Vanessa-Salgado/'\n    orcid: 0000-0002-5300-3075\n    affiliation: Master of Environmental Data Science Program @ The Bren School (UCSB) & The National Center for Ecological Analysis & Synthesis\n    affiliation-url: 'https://ucsb-meds.github.io/'\ndate: 12-13-2023\ncategories:\n  - Python\n  - Environmental\n  - Datasets\ncitation:\n  url: 'https://samanthacsik.github.io/posts/2022-10-24-my-blog-post/'\nimage: preview-image.png\ndraft: false\n---\n\n# Background \n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nx = \"a\"\n```\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
