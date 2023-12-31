@@ -1,0 +1,95 @@
+---
+title: 'Water Stressors for Low Income Food Deficit Countries'
+description: 'Examining Water Use and Water Stress. Comparing Industrial, Irrigation, and Municipial Water Withdrawals '
+author: 
+  - name: 'Vanessa Salgado'
+    url: https://Vanessa-Salgado.github.io/
+    affiliation: MEDS
+    affiliation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science
+date: 'Dec 15, 2023'
+categories: [MEDS, R, Statistics]
+citation:
+  url: https://github.com/Vanessa-Salgado
+image: water-scarcity.jpeg
+draft: false
+footnotes-hover: true
+output: html_document
+format: 
+  html:
+    code-fold: true
+    code-summary: "View Code"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Background and Motivation
+
+Water is the worlds most valuable resource and climate change will likely exacerbate water stress world wide. Water stress will further affect the most vulnerable countries. Vulnerable countries are already facing water shortages, poor water management, privatized water management, etc. Water stressors include demands from agriculture, natural disasters, industrial use , and municipal use. Water stress occurs when demand for safe, usable water in a given area exceeds the supply. I thought a good measure of vulnerability would be to study water stressors in Low income food deficit countries(LIFDCs) given that vulnerable countries often face issues of poverty and food scarcity that are often linked to water vulnerability.
+
+In this study I chose to focus on the most vulnerable areas for certain reasons\
+a. challenge myself with missing data\
+b. stray away from Eurocentric studies that focus on Western development\
+c. Highlight countries of need\
+d.
+
+# Goal
+
+My overall question is: What are the biggest stressors of water resources for "low income food deficit countries?" Understanding what the water stressors are in each country 
+
+# AQUASTAT Data
+
+#### About the Data
+
+The AQUASTAT Dataset is the Food and Agriculure Orgnaization of the United Nations global information system on water resources and agriculture water management. It collects, analyses and provides free access to over 180 variables and indicators by country from 1960. AQUASTAT draws on national capacities and expertise with an emphasis on Africa, the Near East, countries of the former Soviet Union, Asia, and Latin America and the Caribbean. AQUASTAT plays a key role in the monitoring of the Sustainable Development Goal 6 that sets out to "ensure availability and sustainable management of water and sanitation for all", and in particular indicators of target 6.4 on water stress and water use efficiency.
+
+FAO's global Information System on Water and Agriculture can a new online platform that is The visit the AQUASTAT platform, you can visit: [AQUASTAT](https://data.apps.fao.org/aquastat).
+
+#### Data Cleaning
+
+
+# Analysis Plan
+
+-   Clean Data for Variables of Interest
+-   Exploratory Data Analysis
+-   Visualize Urban population of each country by Continent 3 most important water withdrawals
+    -   Irrigation
+    -   Industrial
+    -   Municipal
+-   Linear Model Relationship between Water Stress and Urban Population Relationship between Cultivated area (arable land + permanent crops)
+-   Time Series Data Annual freshwater withdrawals, 2019
+
+**Variables of Interest:**
+
+
+```{r, results ='hide', include=FALSE, echo=FALSE}
+library(tidyverse)
+library(tibble)
+library(ggplot2)
+library(purrr)
+library(tidyr)
+library(readr)
+library(here)
+library(readr)
+library(gt)
+library(tufte)
+library(janitor)
+library(tsibble)
+library(feasts)
+library(countrycode)
+library(knitr)
+library(sf)
+library(wbstats)
+library(rnaturalearth)
+
+library(raster)
+library(terra)
+library(spData)
+library(spDataLarge)
+library(tidyverse)
+library(ggspatial)
+library(patchwork)
+
+library(tmap)
+```

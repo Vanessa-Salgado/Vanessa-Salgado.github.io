@@ -18,7 +18,7 @@
     "href": "posts.html",
     "title": "My Blog",
     "section": "",
-    "text": "Test\n\n\n\nQuarto\n\n\nR\n\n\nMEDS\n\n\n\nblog post description (appears underneath the title in smaller text) which is included on the listing page\n\n\n\nVanessa\n\n\nOct 24, 2022\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Water Stressors for Low Income Food Deficit Countries\n\n\n\nMEDS\n\n\nR\n\n\nStatistics\n\n\n\nExamining Water Use and Water Stress. Comparing Industrial, Irrigation, and Municipial Water Withdrawals\n\n\n\nVanessa Salgado\n\n\nDec 15, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTest\n\n\n\nQuarto\n\n\nR\n\n\nMEDS\n\n\n\nblog post description (appears underneath the title in smaller text) which is included on the listing page\n\n\n\nVanessa\n\n\nOct 24, 2022\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -33,5 +33,19 @@
     "title": "Test",
     "section": "",
     "text": "CitationBibTeX citation:@online{2022,\n  author = {, Vanessa},\n  title = {Test},\n  date = {2022-10-24},\n  url = {https://Vanessa-Salgado.github.io/posts/2023-12-31-test-blog/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nVanessa. 2022. “Test.” October 24, 2022. https://Vanessa-Salgado.github.io/posts/2023-12-31-test-blog/."
+  },
+  {
+    "objectID": "posts/2023-12-15-water-stress/index.html",
+    "href": "posts/2023-12-15-water-stress/index.html",
+    "title": "Water Stressors for Low Income Food Deficit Countries",
+    "section": "",
+    "text": "Background and Motivation\nWater is the worlds most valuable resource and climate change will likely exacerbate water stress world wide. Water stress will further affect the most vulnerable countries. Vulnerable countries are already facing water shortages, poor water management, privatized water management, etc. Water stressors include demands from agriculture, natural disasters, industrial use , and municipal use. Water stress occurs when demand for safe, usable water in a given area exceeds the supply. I thought a good measure of vulnerability would be to study water stressors in Low income food deficit countries(LIFDCs) given that vulnerable countries often face issues of poverty and food scarcity that are often linked to water vulnerability.\nIn this study I chose to focus on the most vulnerable areas for certain reasons\na. challenge myself with missing data\nb. stray away from Eurocentric studies that focus on Western development\nc. Highlight countries of need\nd.\n\n\nGoal\nMy overall question is: What are the biggest stressors of water resources for “low income food deficit countries?” Understanding what the water stressors are in each country\n\n\nAQUASTAT Data\n\nAbout the Data\nThe AQUASTAT Dataset is the Food and Agriculure Orgnaization of the United Nations global information system on water resources and agriculture water management. It collects, analyses and provides free access to over 180 variables and indicators by country from 1960. AQUASTAT draws on national capacities and expertise with an emphasis on Africa, the Near East, countries of the former Soviet Union, Asia, and Latin America and the Caribbean. AQUASTAT plays a key role in the monitoring of the Sustainable Development Goal 6 that sets out to “ensure availability and sustainable management of water and sanitation for all”, and in particular indicators of target 6.4 on water stress and water use efficiency.\nFAO’s global Information System on Water and Agriculture can a new online platform that is The visit the AQUASTAT platform, you can visit: AQUASTAT.\n\n\nData Cleaning\n\n\n\nAnalysis Plan\n\nClean Data for Variables of Interest\nExploratory Data Analysis\nVisualize Urban population of each country by Continent 3 most important water withdrawals\n\nIrrigation\nIndustrial\nMunicipal\n\nLinear Model Relationship between Water Stress and Urban Population Relationship between Cultivated area (arable land + permanent crops)\nTime Series Data Annual freshwater withdrawals, 2019\n\nVariables of Interest:\n\n\n\n\nCitationBibTeX citation:@online{salgado2023,\n  author = {Salgado, Vanessa},\n  title = {Water {Stressors} for {Low} {Income} {Food} {Deficit}\n    {Countries}},\n  date = {2023-12-15},\n  url = {https://github.com/Vanessa-Salgado},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSalgado, Vanessa. 2023. “Water Stressors for Low Income Food\nDeficit Countries.” December 15, 2023. https://github.com/Vanessa-Salgado."
+  },
+  {
+    "objectID": "posts/2023-12-15-water-stress/index.html#background-and-motivation",
+    "href": "posts/2023-12-15-water-stress/index.html#background-and-motivation",
+    "title": "Water Stressors for Low Income Food Deficit Countries",
+    "section": "",
+    "text": "Water is the worlds most valuable resource and climate change will likely exacerbate water stress world wide. Water stress will further affect the most vulnerable countries. Vulnerable countries are already facing water shortages, poor water management, privatized water management, etc. Water stressors include demands from agriculture, natural disasters, industrial use , and municipal use. Water stress occurs when demand for safe, usable water in a given area exceeds the supply. I thought a good measure of vulnerability would be to study water stressors in Low income food deficit countries(LIFDCs) given that vulnerable countries often face issues of poverty and food scarcity that are often linked to water vulnerability.\nIn this study I chose to focus on the most vulnerable areas for certain reasons\na. challenge myself with missing data\nb. stray away from Eurocentric studies that focus on Western development\nc. Highlight countries of need\nd."
   }
 ]
