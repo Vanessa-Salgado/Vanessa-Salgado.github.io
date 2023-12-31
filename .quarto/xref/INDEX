@@ -4,5 +4,14 @@
   },
   "about.qmd": {
     "about.html": "18562c02"
+  },
+  "posts.qmd": {
+    "posts.html": "6c577069"
+  },
+  "posts/2023-12-13-biodiversity-intact-index/index.qmd": {
+    "index.html": "9349e84f"
+  },
+  "posts/2023-12-13-biodiversity-intact-index/Biodiversity_Intact_Index.md": {
+    "Biodiversity_Intact_Index.html": "e33b53d1"
   }
 }

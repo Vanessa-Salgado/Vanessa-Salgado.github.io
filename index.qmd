@@ -1,7 +1,30 @@
 ---
-title: "Vanessa-Salgado"
+title: "Vanessa Salgado"
+toc: false
+about: 
+  template: jolla
+  image-shape: round
+  image-width: 20em
+  links:
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/Vanessa-Salgado/
+    - text: GitHub
+      href: https://github.com/Vanessa-Salgado
+    - text: Email
+      href: mailto:vanessalgadoz@gmail.com
 ---
 
-This is a Quarto website.
+:::{#hero-heading}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+## Education
+
+University of California, Santa Barbara | Santa Barbara, CA
+MEDS at Bren School of Environmental Science & Management 
+
+
+## Experience
+
+
+:::
+

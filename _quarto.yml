@@ -3,18 +3,22 @@ project:
   output-dir: docs
 
 website:
-  title: "Vanessa-Salgado"
+  title: "Vanessa Salgado"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
+      - href: posts.qmd
+        text: Posts
 
 format:
   html:
-    theme: cosmo
+    theme: minty
     css: styles.css
     toc: true
+    page-layout: full
 
-
+editor: visual
 
