@@ -20,13 +20,11 @@ format:
     code-summary: "View Code"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Background and Motivation
 
 Water is the worlds most valuable resource and climate change will likely exacerbate water stress world wide. Water stress will further affect the most vulnerable countries. Vulnerable countries are already facing water shortages, poor water management, privatized water management, etc. Water stressors include demands from agriculture, natural disasters, industrial use , and municipal use. Water stress occurs when demand for safe, usable water in a given area exceeds the supply. I thought a good measure of vulnerability would be to study water stressors in Low income food deficit countries(LIFDCs) given that vulnerable countries often face issues of poverty and food scarcity that are often linked to water vulnerability.
+
+As global population grows (increasing agricultural, industrial and domestic demands for water), and water demand increases, water stress and the risk of water scarcity is now a common concern. This is even more applicable for particular regions with lower water resources and/or larger population pressures.
 
 In this study I chose to focus on the most vulnerable areas for certain reasons\
 a. challenge myself with missing data\
@@ -36,7 +34,10 @@ d.
 
 # Goal
 
-My overall question is: What are the biggest stressors of water resources for "low income food deficit countries?" Understanding what the water stressors are in each country 
+My overall question is: What are the biggest stressors of water resources for "low income food deficit countries?" Understanding what the water stressors are in each country
+
+![Low Income Food Deficit Countries](LIFDC_2.png)
+
 
 # AQUASTAT Data
 
@@ -45,9 +46,6 @@ My overall question is: What are the biggest stressors of water resources for "l
 The AQUASTAT Dataset is the Food and Agriculure Orgnaization of the United Nations global information system on water resources and agriculture water management. It collects, analyses and provides free access to over 180 variables and indicators by country from 1960. AQUASTAT draws on national capacities and expertise with an emphasis on Africa, the Near East, countries of the former Soviet Union, Asia, and Latin America and the Caribbean. AQUASTAT plays a key role in the monitoring of the Sustainable Development Goal 6 that sets out to "ensure availability and sustainable management of water and sanitation for all", and in particular indicators of target 6.4 on water stress and water use efficiency.
 
 FAO's global Information System on Water and Agriculture can a new online platform that is The visit the AQUASTAT platform, you can visit: [AQUASTAT](https://data.apps.fao.org/aquastat).
-
-#### Data Cleaning
-
 
 # Analysis Plan
 
@@ -62,8 +60,9 @@ FAO's global Information System on Water and Agriculture can a new online platfo
 
 **Variables of Interest:**
 
+{r, eval=F, echo=T} will include the R source code in the output file while it is not evaluated
 
-```{r, results ='hide', include=FALSE, echo=FALSE}
+```{r, eval=FALSE, echo=TRUE}
 library(tidyverse)
 library(tibble)
 library(ggplot2)
@@ -72,8 +71,6 @@ library(tidyr)
 library(readr)
 library(here)
 library(readr)
-library(gt)
-library(tufte)
 library(janitor)
 library(tsibble)
 library(feasts)
@@ -93,3 +90,184 @@ library(patchwork)
 
 library(tmap)
 ```
+
+```{r, eval=FALSE, echo=TRUE}
+water <- read_csv("data/AQUASTAT_Dissemination_System.csv")
+
+kable(water[1:5,], caption = "Water Dataset ")
+```
+
+Data Cleaning
+
+```{r, eval=FALSE, echo=TRUE}
+water_resources <- read_csv("data/AQUASTAT_Water_Resources.csv")
+
+# water_data <- water_resources %>% 
+#   subset("Unit", "Symbol") + 
+#   group_by(Country, Variable) %>%
+#   pivot_wider(names_from = Variable,
+#               values_from = c('"2020"', Symbol, Unit))
+# 
+# water_data
+
+water <- read_csv("data/AQUASTAT_Dissemination_System.csv")
+colnames(water)
+
+#water <-  water %>% select(-"...6")
+
+water5 <- water 
+
+subwater <- subset(water, select = -c(Variable, Unit)) 
+
+combin <- paste(water$Variable, water$Unit, sep = "_")
+
+combin <- data.frame(combin)
+
+water = cbind(subwater, combin)
+
+colnames(water) <- c("Country", "Symbol", "2020", "Variable")
+
+water1 <- water %>% 
+  subset(select = -Symbol) %>% 
+  group_by(Country) %>%
+  pivot_wider(names_from = (Variable),
+              values_from = "2020") 
+
+colnames(water1)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+# ---Add a new column "Continent" to water1 that corresponds to Country---
+water1 <- water1 %>%
+  mutate(Continent = countrycode(sourcevar = Country, origin = "country.name", destination = "continent")) %>% 
+  dplyr::rename(Urban_population = `Urban population_1000 inhab`)
+
+water1
+```
+
+# Exploratory Data Analysis
+
+I found that the countries that are labeld LIFDCs belong to 3 continents: Asia, Africa, and the Americas with the majority in the African Continent. Below are the countries and the relative Urban Population to each country by continent.
+
+Prelimanary plot showing rank of Urbanization
+
+```{r, eval=FALSE, echo=TRUE}
+urban_pop_asia <- water1 %>% 
+  filter(Continent == "Asia") %>% 
+  mutate(Urban_population = as.numeric(Urban_population))
+
+ggplot(data = urban_pop_asia, aes(x = Country, y = reorder(Urban_population, Urban_population))) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Adjust the angle as needed
+  geom_text(aes(label = Country), vjust = -0.5, hjust = 1) +  # Adjust vjust and hjust as needed
+  labs(title = "Urban population of Asia",
+       x = "Countries of Asia",
+       y = "Urban population in 1000s")
+urban_pop_asia
+```
+
+Map of Urban Population of Asia
+
+```{r, eval=FALSE, echo=TRUE}
+asia = world |> 
+  filter(continent == "Asia", !is.na(iso_a2)) %>% 
+  dplyr::rename(Country = name_long) %>%
+  right_join(urban_pop_asia, by = "Country") %>% 
+  # dplyr::select(name, subregion, gdpPercap, HDI, pop_growth, urban_pop) %>% 
+  st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
+
+
+asia_map<- ggplot(asia) +
+  geom_sf() +
+  theme_bw()
+asia_map  
+urban_map_asia <- ggplot(asia) +
+  # geom_sf(aes(color) = HDI)) +
+  geom_sf(aes(fill = Urban_population)) +
+  theme_bw() 
+
+asia_map+urban_map_asia
+
+```
+
+#### Agricultural Water Withdrawls and GDP 
+
+Water stress is defined based on the ratio of freshwater withdrawals to renewable freshwater resources. Water stress does not insinuate that a country has water shortages, but does give an indication of how close it maybe be to exceeding a water basin's renewable resources. If water withdrawals exceed available resources (i.e. greater than 100 percent) then a country is either extracting beyond the rate at which aquifers can be replenished, or has very high levels of desalinisation water generation (the conversion of seawater to freshwater using osmosis processes).
+Water stress categories are based on this percentage (% of withdrawals to renewable resources) as follows:
+
+Before Running the linear regression model, I plotted the agricultural water withdrawal versus GDP per capital. I figured that GDP is could be an indicator of urbanization.
+
+![Agricultural water withdrawals vs. GDP per capita, 2019](withdrawal_asia.png)
+This premilniary plot shows that opposite of my prediction--that increased GDP would increase agricultural water withdrawal. Overall, we see a negative correlation: agriculture's share of total water withdrawals tend to decrease at higher incomes. 
+
+The Asian LIFD countries in the plot(clustered around the upper left of the plot) used more water for agriculture. 
+
+# Analysis - Linear Regression
+
+#### Relationship Between Urban Population and Water Stress in Asia
+
+
+For this analysis I ran a linear regression to see if there was some relationship between urban population and water stress. From previous knowledge, we can expect the highter the urban population, the more water stress we can expect. An increase in urban populations might exasperate water withrawals in cities. Droughts may be exasperated in more urban areas due to increase temperatures from urbanization, transportions, 
+
+```{r, eval=FALSE, echo=TRUE}
+water_select <- water1 %>% 
+  select(c("SDG 6.4.2. Water Stress_%","Urban population_1000 inhab", "Country")) %>% 
+  mutate(`Urban population_1000 inhab` = as.numeric(`Urban population_1000 inhab`)) %>% 
+  mutate(`SDG 6.4.2. Water Stress_%` = as.numeric(`SDG 6.4.2. Water Stress_%`))
+
+water_select
+water_stress_lm <- lm(` Water Stress_%` ~ `Urban population_1000 inhab`, data = water_select)
+summary(water_stress_lm)
+```
+
+![Linear Model](linear_mod.png)
+The linear model used here does not conclude to a definite conclusion. 
+
+# Analysis - Time Series of Freshwater Withdrawls (Asia)
+Here, I atttempt to use a Time Series of the Freshwater and Municipial water withdrawals.
+
+Irrigation water withdrawal normally far exceeds the net irrigation water requirement because of water lost in its distribution from its source to the crops.
+
+Assessing the impact of irrigation on water resources requires an estimate of the water effectively withdrawn for irrigation, i.e. the volume of water extracted from rivers, lakes and aquifers for irrigation purposes
+
+```{r, eval=FALSE, echo=TRUE}
+annual_freshwawter_withdrawls$Year <- as.Date(AirPassengers$Year)
+
+# Create a time series plot
+ts_annual_freshwater <- annual_freshwawter_withdrawls %>% 
+  group_by(Year) %>% 
+  ggplot( aes(x = Year, y = `Annual freshwater withdrawals, total (billion cubic meters)`, color = Entity)) +
+  geom_point() +
+  labs(title = "Annual freshwater withdrawals, 1975 to 2019",
+       x = "Year",
+       y = "total water withdrawalin cubic metres (m³) per year")
+ts_annual_freshwater 
+```
+
+
+![Fresh Water Withdrawal 1975 - 2019, Asia](Freshwater_withdrawal.png)
+
+# Analysis - Time Series of Municipial Water Withdrawals (Asia)
+
+**Municipal water withdrawal**
+
+Total water withdrawal for municipal (domestic) purposes, measured in cubic metres (m³) per year. Municipal water is the annual quantity of water withdrawn primarily for the direct use by the population.
+
+```{r, eval=FALSE, echo=TRUE}
+annual_minicipial_withdrawls$Year <- as.Date(AirPassengers$Year)
+
+# Create a time series plot
+ts_annual_municipial <- annual_minicipial_withdrawls %>% 
+  group_by(Year) %>% 
+  ggplot( aes(x = Year, y = `Annual municipial withdrawals, total (billion cubic meters)`, color = Entity)) +
+  geom_point() +
+  labs(title = "Annual minicipial withdrawals, 1975 to 2019",
+       x = "Year",
+       y = "total water withdrawalin cubic metres (m³) per year")
+ts_annual_freshwater 
+```
+
+![Municipial Water Withdrawl from 1970 to 2015,Asia](Mucipial_withdrawal.png)
+
+
+# References

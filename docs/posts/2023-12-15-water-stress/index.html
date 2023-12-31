@@ -23,6 +23,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -163,6 +197,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal">Goal</a></li>
   <li><a href="#aquastat-data" id="toc-aquastat-data" class="nav-link" data-scroll-target="#aquastat-data">AQUASTAT Data</a></li>
   <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis Plan</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
+  <li><a href="#analysis---linear-regression" id="toc-analysis---linear-regression" class="nav-link" data-scroll-target="#analysis---linear-regression">Analysis - Linear Regression</a></li>
+  <li><a href="#analysis---time-series-of-freshwater-withdrawls-asia" id="toc-analysis---time-series-of-freshwater-withdrawls-asia" class="nav-link" data-scroll-target="#analysis---time-series-of-freshwater-withdrawls-asia">Analysis - Time Series of Freshwater Withdrawls (Asia)</a></li>
+  <li><a href="#analysis---time-series-of-municipial-water-withdrawals-asia" id="toc-analysis---time-series-of-municipial-water-withdrawals-asia" class="nav-link" data-scroll-target="#analysis---time-series-of-municipial-water-withdrawals-asia">Analysis - Time Series of Municipial Water Withdrawals (Asia)</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -175,6 +214,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="background-and-motivation" class="level1">
 <h1>Background and Motivation</h1>
 <p>Water is the worlds most valuable resource and climate change will likely exacerbate water stress world wide. Water stress will further affect the most vulnerable countries. Vulnerable countries are already facing water shortages, poor water management, privatized water management, etc. Water stressors include demands from agriculture, natural disasters, industrial use , and municipal use. Water stress occurs when demand for safe, usable water in a given area exceeds the supply. I thought a good measure of vulnerability would be to study water stressors in Low income food deficit countries(LIFDCs) given that vulnerable countries often face issues of poverty and food scarcity that are often linked to water vulnerability.</p>
+<p>As global population grows (increasing agricultural, industrial and domestic demands for water), and water demand increases, water stress and the risk of water scarcity is now a common concern. This is even more applicable for particular regions with lower water resources and/or larger population pressures.</p>
 <p>In this study I chose to focus on the most vulnerable areas for certain reasons<br>
 a. challenge myself with missing data<br>
 b. stray away from Eurocentric studies that focus on Western development<br>
@@ -184,6 +224,12 @@ d.</p>
 <section id="goal" class="level1">
 <h1>Goal</h1>
 <p>My overall question is: What are the biggest stressors of water resources for “low income food deficit countries?” Understanding what the water stressors are in each country</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="LIFDC_2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Low Income Food Deficit Countries</figcaption>
+</figure>
+</div>
 </section>
 <section id="aquastat-data" class="level1">
 <h1>AQUASTAT Data</h1>
@@ -191,9 +237,6 @@ d.</p>
 <h4 class="anchored" data-anchor-id="about-the-data">About the Data</h4>
 <p>The AQUASTAT Dataset is the Food and Agriculure Orgnaization of the United Nations global information system on water resources and agriculture water management. It collects, analyses and provides free access to over 180 variables and indicators by country from 1960. AQUASTAT draws on national capacities and expertise with an emphasis on Africa, the Near East, countries of the former Soviet Union, Asia, and Latin America and the Caribbean. AQUASTAT plays a key role in the monitoring of the Sustainable Development Goal 6 that sets out to “ensure availability and sustainable management of water and sanitation for all”, and in particular indicators of target 6.4 on water stress and water use efficiency.</p>
 <p>FAO’s global Information System on Water and Agriculture can a new online platform that is The visit the AQUASTAT platform, you can visit: <a href="https://data.apps.fao.org/aquastat">AQUASTAT</a>.</p>
-</section>
-<section id="data-cleaning" class="level4">
-<h4 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h4>
 </section>
 </section>
 <section id="analysis-plan" class="level1">
@@ -211,6 +254,229 @@ d.</p>
 <li>Time Series Data Annual freshwater withdrawals, 2019</li>
 </ul>
 <p><strong>Variables of Interest:</strong></p>
+<p>{r, eval=F, echo=T} will include the R source code in the output file while it is not evaluated</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tsibble)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(feasts)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(countrycode)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wbstats)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spData)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spDataLarge)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>water <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/AQUASTAT_Dissemination_System.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(water[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,], <span class="at">caption =</span> <span class="st">"Water Dataset "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Data Cleaning</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>water_resources <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/AQUASTAT_Water_Resources.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># water_data &lt;- water_resources %&gt;% </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   subset("Unit", "Symbol") + </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(Country, Variable) %&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_wider(names_from = Variable,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#               values_from = c('"2020"', Symbol, Unit))</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># water_data</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>water <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/AQUASTAT_Dissemination_System.csv"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(water)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#water &lt;-  water %&gt;% select(-"...6")</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>water5 <span class="ot">&lt;-</span> water </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>subwater <span class="ot">&lt;-</span> <span class="fu">subset</span>(water, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(Variable, Unit)) </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>combin <span class="ot">&lt;-</span> <span class="fu">paste</span>(water<span class="sc">$</span>Variable, water<span class="sc">$</span>Unit, <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>combin <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(combin)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>water <span class="ot">=</span> <span class="fu">cbind</span>(subwater, combin)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(water) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Symbol"</span>, <span class="st">"2020"</span>, <span class="st">"Variable"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>water1 <span class="ot">&lt;-</span> water <span class="sc">%&gt;%</span> </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="sc">-</span>Symbol) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> (Variable),</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="st">"2020"</span>) </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(water1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---Add a new column "Continent" to water1 that corresponds to Country---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>water1 <span class="ot">&lt;-</span> water1 <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Continent =</span> <span class="fu">countrycode</span>(<span class="at">sourcevar =</span> Country, <span class="at">origin =</span> <span class="st">"country.name"</span>, <span class="at">destination =</span> <span class="st">"continent"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Urban_population =</span> <span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>water1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="exploratory-data-analysis" class="level1">
+<h1>Exploratory Data Analysis</h1>
+<p>I found that the countries that are labeld LIFDCs belong to 3 continents: Asia, Africa, and the Americas with the majority in the African Continent. Below are the countries and the relative Urban Population to each country by continent.</p>
+<p>Prelimanary plot showing rank of Urbanization</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>urban_pop_asia <span class="ot">&lt;-</span> water1 <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Continent <span class="sc">==</span> <span class="st">"Asia"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Urban_population =</span> <span class="fu">as.numeric</span>(Urban_population))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> urban_pop_asia, <span class="fu">aes</span>(<span class="at">x =</span> Country, <span class="at">y =</span> <span class="fu">reorder</span>(Urban_population, Urban_population))) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span>  <span class="co"># Adjust the angle as needed</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Country), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># Adjust vjust and hjust as needed</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Urban population of Asia"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Countries of Asia"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Urban population in 1000s"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>urban_pop_asia</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Map of Urban Population of Asia</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>asia <span class="ot">=</span> world <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(continent <span class="sc">==</span> <span class="st">"Asia"</span>, <span class="sc">!</span><span class="fu">is.na</span>(iso_a2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Country =</span> name_long) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(urban_pop_asia, <span class="at">by =</span> <span class="st">"Country"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># dplyr::select(name, subregion, gdpPercap, HDI, pop_growth, urban_pop) %&gt;% </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="st">"+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>asia_map<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(asia) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>asia_map  </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>urban_map_asia <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(asia) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_sf(aes(color) = HDI)) +</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Urban_population)) <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>asia_map<span class="sc">+</span>urban_map_asia</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="agricultural-water-withdrawls-and-gdp" class="level4">
+<h4 class="anchored" data-anchor-id="agricultural-water-withdrawls-and-gdp">Agricultural Water Withdrawls and GDP</h4>
+<p>Water stress is defined based on the ratio of freshwater withdrawals to renewable freshwater resources. Water stress does not insinuate that a country has water shortages, but does give an indication of how close it maybe be to exceeding a water basin’s renewable resources. If water withdrawals exceed available resources (i.e.&nbsp;greater than 100 percent) then a country is either extracting beyond the rate at which aquifers can be replenished, or has very high levels of desalinisation water generation (the conversion of seawater to freshwater using osmosis processes). Water stress categories are based on this percentage (% of withdrawals to renewable resources) as follows:</p>
+<p>Before Running the linear regression model, I plotted the agricultural water withdrawal versus GDP per capital. I figured that GDP is could be an indicator of urbanization.</p>
+<p><img src="withdrawal_asia.png" class="img-fluid" alt="Agricultural water withdrawals vs.&nbsp;GDP per capita, 2019"> This premilniary plot shows that opposite of my prediction–that increased GDP would increase agricultural water withdrawal. Overall, we see a negative correlation: agriculture’s share of total water withdrawals tend to decrease at higher incomes.</p>
+<p>The Asian LIFD countries in the plot(clustered around the upper left of the plot) used more water for agriculture.</p>
+</section>
+</section>
+<section id="analysis---linear-regression" class="level1">
+<h1>Analysis - Linear Regression</h1>
+<section id="relationship-between-urban-population-and-water-stress-in-asia" class="level4">
+<h4 class="anchored" data-anchor-id="relationship-between-urban-population-and-water-stress-in-asia">Relationship Between Urban Population and Water Stress in Asia</h4>
+<p>For this analysis I ran a linear regression to see if there was some relationship between urban population and water stress. From previous knowledge, we can expect the highter the urban population, the more water stress we can expect. An increase in urban populations might exasperate water withrawals in cities. Droughts may be exasperated in more urban areas due to increase temperatures from urbanization, transportions,</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>water_select <span class="ot">&lt;-</span> water1 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"SDG 6.4.2. Water Stress_%"</span>,<span class="st">"Urban population_1000 inhab"</span>, <span class="st">"Country"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">SDG 6.4.2. Water Stress_%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">SDG 6.4.2. Water Stress_%</span><span class="st">`</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>water_select</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>water_stress_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at"> Water Stress_%</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span>, <span class="at">data =</span> water_select)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(water_stress_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><img src="linear_mod.png" class="img-fluid" alt="Linear Model"> The linear model used here does not conclude to a definite conclusion.</p>
+</section>
+</section>
+<section id="analysis---time-series-of-freshwater-withdrawls-asia" class="level1">
+<h1>Analysis - Time Series of Freshwater Withdrawls (Asia)</h1>
+<p>Here, I atttempt to use a Time Series of the Freshwater and Municipial water withdrawals.</p>
+<p>Irrigation water withdrawal normally far exceeds the net irrigation water requirement because of water lost in its distribution from its source to the crops.</p>
+<p>Assessing the impact of irrigation on water resources requires an estimate of the water effectively withdrawn for irrigation, i.e.&nbsp;the volume of water extracted from rivers, lakes and aquifers for irrigation purposes</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>annual_freshwawter_withdrawls<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(AirPassengers<span class="sc">$</span>Year)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series plot</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ts_annual_freshwater <span class="ot">&lt;-</span> annual_freshwawter_withdrawls <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Annual freshwater withdrawals, total (billion cubic meters)</span><span class="st">`</span>, <span class="at">color =</span> Entity)) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Annual freshwater withdrawals, 1975 to 2019"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"total water withdrawalin cubic metres (m³) per year"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ts_annual_freshwater </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Freshwater_withdrawal.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Fresh Water Withdrawal 1975 - 2019, Asia</figcaption>
+</figure>
+</div>
+</section>
+<section id="analysis---time-series-of-municipial-water-withdrawals-asia" class="level1">
+<h1>Analysis - Time Series of Municipial Water Withdrawals (Asia)</h1>
+<p><strong>Municipal water withdrawal</strong></p>
+<p>Total water withdrawal for municipal (domestic) purposes, measured in cubic metres (m³) per year. Municipal water is the annual quantity of water withdrawn primarily for the direct use by the population.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>annual_minicipial_withdrawls<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(AirPassengers<span class="sc">$</span>Year)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series plot</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ts_annual_municipial <span class="ot">&lt;-</span> annual_minicipial_withdrawls <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Annual municipial withdrawals, total (billion cubic meters)</span><span class="st">`</span>, <span class="at">color =</span> Entity)) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Annual minicipial withdrawals, 1975 to 2019"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"total water withdrawalin cubic metres (m³) per year"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ts_annual_freshwater </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Mucipial_withdrawal.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Municipial Water Withdrawl from 1970 to 2015,Asia</figcaption>
+</figure>
+</div>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
 
 
 </section>
