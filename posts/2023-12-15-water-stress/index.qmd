@@ -97,7 +97,9 @@ water <- read_csv("data/AQUASTAT_Dissemination_System.csv")
 kable(water[1:5,], caption = "Water Dataset ")
 ```
 
-Data Cleaning
+**Data Cleaning**
+
+Althought the AQUASTAT dataset was very detailed, cleaning the data resulted in a challenge. Downloading the dataset from the online platform made, resulted in a dataset with a `Country`, `Variable`, and `Unit` column. Below is the data cleaning process. Essentially, I 
 
 ```{r, eval=FALSE, echo=TRUE}
 water_resources <- read_csv("data/AQUASTAT_Water_Resources.csv")
@@ -149,24 +151,58 @@ water1
 
 I found that the countries that are labeld LIFDCs belong to 3 continents: Asia, Africa, and the Americas with the majority in the African Continent. Below are the countries and the relative Urban Population to each country by continent.
 
-Prelimanary plot showing rank of Urbanization
+
+#### Map of Urban Population of Asia
+
+::: panel-tabset
+#### Map of Urban Population of Africa
 
 ```{r, eval=FALSE, echo=TRUE}
-urban_pop_asia <- water1 %>% 
-  filter(Continent == "Asia") %>% 
-  mutate(Urban_population = as.numeric(Urban_population))
+asia = world |> 
+  filter(continent == "Asia", !is.na(iso_a2)) %>% 
+  dplyr::rename(Country = name_long) %>%
+  right_join(urban_pop_asia, by = "Country") %>% 
+  # dplyr::select(name, subregion, gdpPercap, HDI, pop_growth, urban_pop) %>% 
+  st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
 
-ggplot(data = urban_pop_asia, aes(x = Country, y = reorder(Urban_population, Urban_population))) +
-  geom_point() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Adjust the angle as needed
-  geom_text(aes(label = Country), vjust = -0.5, hjust = 1) +  # Adjust vjust and hjust as needed
-  labs(title = "Urban population of Asia",
-       x = "Countries of Asia",
-       y = "Urban population in 1000s")
-urban_pop_asia
+
+asia_map<- ggplot(asia) +
+  geom_sf() +
+  theme_bw()
+
+urban_map_asia <- ggplot(asia) +
+  # geom_sf(aes(color) = HDI)) +
+  geom_sf(aes(fill = Urban_population)) +
+  theme_bw() 
+
+asia_map+urban_map_asia
 ```
 
-Map of Urban Population of Asia
+#### Map of Urban Population of Asia
+
+```{r, eval=FALSE, echo=TRUE}
+asia = world |> 
+  filter(continent == "Asia", !is.na(iso_a2)) %>% 
+  dplyr::rename(Country = name_long) %>%
+  right_join(urban_pop_asia, by = "Country") %>% 
+  # dplyr::select(name, subregion, gdpPercap, HDI, pop_growth, urban_pop) %>% 
+  st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
+
+
+asia_map<- ggplot(asia) +
+  geom_sf() +
+  theme_bw()
+ 
+urban_map_asia <- ggplot(asia) +
+  # geom_sf(aes(color) = HDI)) +
+  geom_sf(aes(fill = Urban_population)) +
+  theme_bw() 
+
+asia_map+urban_map_asia
+```
+
+
+#### Map of Urban Population of Americas
 
 ```{r, eval=FALSE, echo=TRUE}
 asia = world |> 
@@ -187,8 +223,8 @@ urban_map_asia <- ggplot(asia) +
   theme_bw() 
 
 asia_map+urban_map_asia
-
 ```
+:::
 
 #### Agricultural Water Withdrawls and GDP 
 
@@ -198,7 +234,7 @@ Water stress categories are based on this percentage (% of withdrawals to renewa
 Before Running the linear regression model, I plotted the agricultural water withdrawal versus GDP per capital. I figured that GDP is could be an indicator of urbanization.
 
 ![Agricultural water withdrawals vs. GDP per capita, 2019](withdrawal_asia.png)
-This premilniary plot shows that opposite of my prediction--that increased GDP would increase agricultural water withdrawal. Overall, we see a negative correlation: agriculture's share of total water withdrawals tend to decrease at higher incomes. 
+This premilniary plot shows that opposite of my prediction--that increased GDP would increase agricultural water withdrawal. **Overall, we see a negative correlation: agriculture's share of total water withdrawals tend to decrease at higher incomes.**
 
 The Asian LIFD countries in the plot(clustered around the upper left of the plot) used more water for agriculture. 
 
@@ -207,7 +243,7 @@ The Asian LIFD countries in the plot(clustered around the upper left of the plot
 #### Relationship Between Urban Population and Water Stress in Asia
 
 
-For this analysis I ran a linear regression to see if there was some relationship between urban population and water stress. From previous knowledge, we can expect the highter the urban population, the more water stress we can expect. An increase in urban populations might exasperate water withrawals in cities. Droughts may be exasperated in more urban areas due to increase temperatures from urbanization, transportions, 
+For this analysis I **ran a linear regression to see if there was some relationship between urban population and water stress**. From previous knowledge, we can expect the highter the urban population, the more water stress we can expect. An increase in urban populations might exasperate water withrawals in cities. Droughts may be exasperated in more urban areas due to increase temperatures from urbanization, transportions, 
 
 ```{r, eval=FALSE, echo=TRUE}
 water_select <- water1 %>% 
@@ -221,10 +257,11 @@ summary(water_stress_lm)
 ```
 
 ![Linear Model](linear_mod.png)
-The linear model used here does not conclude to a definite conclusion. 
+
+**The linear model used here does not conclude to a definite conclusion.** The R-squared measurement of 2.7%. This was to be expected. From the EDA step, we saw a negative correlation between Agricultural water withdrawal and GDP. GDP is a fair indicator of urbanization therefore a low r-squared value seems to be on the right track.
 
 # Analysis - Time Series of Freshwater Withdrawls (Asia)
-Here, I atttempt to use a Time Series of the Freshwater and Municipial water withdrawals.
+Here, I atttempted to use a Time Series of the Freshwater and Municipial water withdrawals.
 
 Irrigation water withdrawal normally far exceeds the net irrigation water requirement because of water lost in its distribution from its source to the crops.
 
@@ -246,6 +283,9 @@ ts_annual_freshwater
 
 
 ![Fresh Water Withdrawal 1975 - 2019, Asia](Freshwater_withdrawal.png)
+
+**Interpretation**
+I chose Asian countries becuase it was the easiest to visualize in one plot. We can see that there is missing data for many countries up until 1995, therefore it makes for a 
 
 # Analysis - Time Series of Municipial Water Withdrawals (Asia)
 
@@ -269,5 +309,12 @@ ts_annual_freshwater
 
 ![Municipial Water Withdrawl from 1970 to 2015,Asia](Mucipial_withdrawal.png)
 
+**Interpretation**
 
+
+# Summary 
+
+# Limitations and Next Steps
 # References
+
+
