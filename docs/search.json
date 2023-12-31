@@ -18,7 +18,7 @@
     "href": "posts.html",
     "title": "My Blog",
     "section": "",
-    "text": "No matching items"
+    "text": "Test\n\n\n\nQuarto\n\n\nR\n\n\nMEDS\n\n\n\nblog post description (appears underneath the title in smaller text) which is included on the listing page\n\n\n\nVanessa\n\n\nOct 24, 2022\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -26,5 +26,12 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "posts/2023-12-31-test-blog/index.html",
+    "href": "posts/2023-12-31-test-blog/index.html",
+    "title": "Test",
+    "section": "",
+    "text": "CitationBibTeX citation:@online{2022,\n  author = {, Vanessa},\n  title = {Test},\n  date = {2022-10-24},\n  url = {https://Vanessa-Salgado.github.io/posts/2023-12-31-test-blog/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nVanessa. 2022. “Test.” October 24, 2022. https://Vanessa-Salgado.github.io/posts/2023-12-31-test-blog/."
   }
 ]
