@@ -58,9 +58,10 @@ FAO's global Information System on Water and Agriculture can a new online platfo
 -   Linear Model Relationship between Water Stress and Urban Population Relationship between Cultivated area (arable land + permanent crops)
 -   Time Series Data Annual freshwater withdrawals, 2019
 
-**Variables of Interest:**
 
-{r, eval=F, echo=T} will include the R source code in the output file while it is not evaluated
+**Data Cleaning**
+
+Althought the AQUASTAT dataset was very detailed, cleaning the data resulted in a challenge. Downloading the dataset from the online platform made, resulted in a dataset with a `Country`, `Variable`, and `Unit` column. Below is the data cleaning process. Essentially, I had to pivot the entire table and rejoin units with their variable. 
 
 ```{r, eval=FALSE, echo=TRUE}
 library(tidyverse)
@@ -90,16 +91,6 @@ library(patchwork)
 
 library(tmap)
 ```
-
-```{r, eval=FALSE, echo=TRUE}
-water <- read_csv("data/AQUASTAT_Dissemination_System.csv")
-
-kable(water[1:5,], caption = "Water Dataset ")
-```
-
-**Data Cleaning**
-
-Althought the AQUASTAT dataset was very detailed, cleaning the data resulted in a challenge. Downloading the dataset from the online platform made, resulted in a dataset with a `Country`, `Variable`, and `Unit` column. Below is the data cleaning process. Essentially, I 
 
 ```{r, eval=FALSE, echo=TRUE}
 water_resources <- read_csv("data/AQUASTAT_Water_Resources.csv")
@@ -136,9 +127,7 @@ water1 <- water %>%
               values_from = "2020") 
 
 colnames(water1)
-```
 
-```{r, eval=FALSE, echo=TRUE}
 # ---Add a new column "Continent" to water1 that corresponds to Country---
 water1 <- water1 %>%
   mutate(Continent = countrycode(sourcevar = Country, origin = "country.name", destination = "continent")) %>% 
@@ -229,7 +218,6 @@ urban_map_america <- ggplot(america) +
 america_map+urban_map_america
 ```
 ![Americas Urban Population](Americas_urban.png)
-
 :::
 
 #### Agricultural Water Withdrawls and GDP 
@@ -329,7 +317,11 @@ There is a lot of missing data for LIFDCs due to privatized water management sys
 
 # References
 
-Hannah Ritchie and Max Roser (2018) - “Water Use and Stress” Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/water-use-stress' [Online Resource]
+Hannah Ritchie and Max Roser (2018)-“Water Use and Stress” Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/water-use-stress' [Online Resource]
+
+(2021)-"AQUASTAT - FAO's Global Information System on Water and Agriculture" Published online at www.fao.org. Retrieved from: 'https://www.fao.org/aquastat/en/data-analysis/irrig-water-use/' [Online Resource]
+
+(2021)-"AQUASTAT Dissemination System" Published online at www.fao.org. Retrieved from: 'https://data.apps.fao.org/aquastat/?lang=en' [Online Resource]
 
 
 
