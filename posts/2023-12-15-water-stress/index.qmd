@@ -223,7 +223,6 @@ america_map+urban_map_america
 #### Agricultural Water Withdrawls and GDP 
 
 Water stress is defined based on the ratio of freshwater withdrawals to renewable freshwater resources. Water stress does not insinuate that a country has water shortages, but does give an indication of how close it maybe be to exceeding a water basin's renewable resources. If water withdrawals exceed available resources (i.e. greater than 100 percent) then a country is either extracting beyond the rate at which aquifers can be replenished, or has very high levels of desalinisation water generation (the conversion of seawater to freshwater using osmosis processes).
-Water stress categories are based on this percentage (% of withdrawals to renewable resources) as follows:
 
 Before Running the linear regression model, I plotted the agricultural water withdrawal versus GDP per capital. I figured that GDP is could be an indicator of urbanization.
 
@@ -237,6 +236,7 @@ ggplot(data = urban_pop_asia, aes(x = GDP, y = `Agricultural Water Withdrawal`))
        y = "Annual freshwaer withdrawals, agricuture(% of total freshwater withdrawl)") +
   theme_minimal()
 ```
+
 
 ![Agricultural water withdrawals vs. GDP per capita, 2019](withdrawal_asia.png)
 

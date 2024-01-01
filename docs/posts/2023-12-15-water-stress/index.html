@@ -256,7 +256,7 @@ c.&nbsp;Highlight countries of need<br>
 <li>Time Series Data Annual freshwater withdrawals, 2019</li>
 </ul>
 <p><strong>Data Cleaning</strong></p>
-<p>Althought the AQUASTAT dataset was very detailed, cleaning the data resulted in a challenge. Downloading the dataset from the online platform made, resulted in a dataset with a <code>Country</code>, <code>Variable</code>, and <code>Unit</code> column. Below is the data cleaning process. Essentially, I</p>
+<p>Althought the AQUASTAT dataset was very detailed, cleaning the data resulted in a challenge. Downloading the dataset from the online platform made, resulted in a dataset with a <code>Country</code>, <code>Variable</code>, and <code>Unit</code> column. Below is the data cleaning process. Essentially, I had to pivot the entire table and rejoin units with their variable.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -441,9 +441,28 @@ c.&nbsp;Highlight countries of need<br>
 </section>
 <section id="agricultural-water-withdrawls-and-gdp" class="level4">
 <h4 class="anchored" data-anchor-id="agricultural-water-withdrawls-and-gdp">Agricultural Water Withdrawls and GDP</h4>
-<p>Water stress is defined based on the ratio of freshwater withdrawals to renewable freshwater resources. Water stress does not insinuate that a country has water shortages, but does give an indication of how close it maybe be to exceeding a water basin’s renewable resources. If water withdrawals exceed available resources (i.e.&nbsp;greater than 100 percent) then a country is either extracting beyond the rate at which aquifers can be replenished, or has very high levels of desalinisation water generation (the conversion of seawater to freshwater using osmosis processes). Water stress categories are based on this percentage (% of withdrawals to renewable resources) as follows:</p>
+<p>Water stress is defined based on the ratio of freshwater withdrawals to renewable freshwater resources. Water stress does not insinuate that a country has water shortages, but does give an indication of how close it maybe be to exceeding a water basin’s renewable resources. If water withdrawals exceed available resources (i.e.&nbsp;greater than 100 percent) then a country is either extracting beyond the rate at which aquifers can be replenished, or has very high levels of desalinisation water generation (the conversion of seawater to freshwater using osmosis processes).</p>
 <p>Before Running the linear regression model, I plotted the agricultural water withdrawal versus GDP per capital. I figured that GDP is could be an indicator of urbanization.</p>
-<p><img src="withdrawal_asia.png" class="img-fluid" alt="Agricultural water withdrawals vs.&nbsp;GDP per capita, 2019"> This premilniary plot shows that opposite of my prediction–that increased GDP would increase agricultural water withdrawal. <strong>Overall, we see a negative correlation: agriculture’s share of total water withdrawals tend to decrease at higher incomes.</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> urban_pop_asia, <span class="fu">aes</span>(<span class="at">x =</span> GDP, <span class="at">y =</span> <span class="st">`</span><span class="at">Agricultural Water Withdrawal</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span>  <span class="co"># Adjust the angle as needed</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Country), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># Adjust vjust and hjust as needed</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Agricultural water withdrawals vs. GDP per capita, 2019"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"GDP per Capita"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Annual freshwaer withdrawals, agricuture(% of total freshwater withdrawl)"</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="withdrawal_asia.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Agricultural water withdrawals vs.&nbsp;GDP per capita, 2019</figcaption>
+</figure>
+</div>
+<p>This premilniary plot shows that opposite of my prediction–that increased GDP would increase agricultural water withdrawal. <strong>Overall, we see a negative correlation: agriculture’s share of total water withdrawals tend to decrease at higher incomes.</strong></p>
 <p>The Asian LIFD countries in the plot(clustered around the upper left of the plot) used more water for agriculture.</p>
 </section>
 </section>
@@ -455,14 +474,14 @@ c.&nbsp;Highlight countries of need<br>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>water_select <span class="ot">&lt;-</span> water1 <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"SDG 6.4.2. Water Stress_%"</span>,<span class="st">"Urban population_1000 inhab"</span>, <span class="st">"Country"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">SDG 6.4.2. Water Stress_%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">SDG 6.4.2. Water Stress_%</span><span class="st">`</span>))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>water_select</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>water_stress_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at"> Water Stress_%</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span>, <span class="at">data =</span> water_select)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(water_stress_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>water_select <span class="ot">&lt;-</span> water1 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"SDG 6.4.2. Water Stress_%"</span>,<span class="st">"Urban population_1000 inhab"</span>, <span class="st">"Country"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">SDG 6.4.2. Water Stress_%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">SDG 6.4.2. Water Stress_%</span><span class="st">`</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>water_select</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>water_stress_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at"> Water Stress_%</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Urban population_1000 inhab</span><span class="st">`</span>, <span class="at">data =</span> water_select)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(water_stress_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -482,17 +501,17 @@ c.&nbsp;Highlight countries of need<br>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>annual_freshwawter_withdrawls<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(AirPassengers<span class="sc">$</span>Year)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series plot</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ts_annual_freshwater <span class="ot">&lt;-</span> annual_freshwawter_withdrawls <span class="sc">%&gt;%</span> </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Annual freshwater withdrawals, total (billion cubic meters)</span><span class="st">`</span>, <span class="at">color =</span> Entity)) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Annual freshwater withdrawals, 1975 to 2019"</span>,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"total water withdrawalin cubic metres (m³) per year"</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ts_annual_freshwater </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>annual_freshwawter_withdrawls<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(AirPassengers<span class="sc">$</span>Year)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series plot</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ts_annual_freshwater <span class="ot">&lt;-</span> annual_freshwawter_withdrawls <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Annual freshwater withdrawals, total (billion cubic meters)</span><span class="st">`</span>, <span class="at">color =</span> Entity)) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Annual freshwater withdrawals, 1975 to 2019"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"total water withdrawalin cubic metres (m³) per year"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ts_annual_freshwater </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -510,17 +529,17 @@ c.&nbsp;Highlight countries of need<br>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>annual_minicipial_withdrawls<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(AirPassengers<span class="sc">$</span>Year)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series plot</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ts_annual_municipial <span class="ot">&lt;-</span> annual_minicipial_withdrawls <span class="sc">%&gt;%</span> </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Annual municipial withdrawals, total (billion cubic meters)</span><span class="st">`</span>, <span class="at">color =</span> Entity)) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Annual minicipial withdrawals, 1975 to 2019"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"total water withdrawalin cubic metres (m³) per year"</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ts_annual_freshwater </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>annual_minicipial_withdrawls<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(AirPassengers<span class="sc">$</span>Year)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series plot</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ts_annual_municipial <span class="ot">&lt;-</span> annual_minicipial_withdrawls <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Annual municipial withdrawals, total (billion cubic meters)</span><span class="st">`</span>, <span class="at">color =</span> Entity)) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Annual minicipial withdrawals, 1975 to 2019"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"total water withdrawalin cubic metres (m³) per year"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ts_annual_freshwater </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="quarto-figure quarto-figure-center">
