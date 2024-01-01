@@ -234,7 +234,8 @@ ggplot(data = urban_pop_asia, aes(x = GDP, y = `Agricultural Water Withdrawal`))
   geom_text(aes(label = Country), vjust = -0.5, hjust = 1) +  # Adjust vjust and hjust as needed
   labs(title = "Agricultural water withdrawals vs. GDP per capita, 2019",
        x = "GDP per Capita",
-       y = "Annual freshwaer withdrawals, agricuture(% of total freshwater withdrawl)")
+       y = "Annual freshwaer withdrawals, agricuture(% of total freshwater withdrawl)") +
+  theme_minimal()
 ```
 
 ![Agricultural water withdrawals vs. GDP per capita, 2019](withdrawal_asia.png)
