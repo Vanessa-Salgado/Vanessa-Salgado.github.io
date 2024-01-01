@@ -6,7 +6,7 @@ author:
     url: https://Vanessa-Salgado.github.io/
     affiliation: Master of Environmental Data Science Program @ The Bren School (UCSB)
     affiliation-url: https://ucsb-meds.github.io/ 
-date: 10-24-2022
+date: 10-24-2023
 categories: [Quarto, R, MEDS] # self-defined categories
 citation: 
   url: https://Vanessa-Salgado.github.io/posts/2023-12-31-test-blog/

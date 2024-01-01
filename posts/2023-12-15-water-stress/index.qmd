@@ -30,7 +30,7 @@ In this study I chose to focus on the most vulnerable areas for certain reasons\
 a. challenge myself with missing data\
 b. stray away from Eurocentric studies that focus on Western development\
 c. Highlight countries of need\
-d.
+
 
 # Goal
 
@@ -158,25 +158,27 @@ I found that the countries that are labeld LIFDCs belong to 3 continents: Asia, 
 #### Map of Urban Population of Africa
 
 ```{r, eval=FALSE, echo=TRUE}
-asia = world |> 
-  filter(continent == "Asia", !is.na(iso_a2)) %>% 
+africa = world |> 
+  filter(continent == "Africa", !is.na(iso_a2)) %>% 
   dplyr::rename(Country = name_long) %>%
-  right_join(urban_pop_asia, by = "Country") %>% 
+  right_join(urban_pop_africa, by = "Country") %>% 
   # dplyr::select(name, subregion, gdpPercap, HDI, pop_growth, urban_pop) %>% 
   st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
 
 
-asia_map<- ggplot(asia) +
+africa_map<- ggplot(africa) +
   geom_sf() +
   theme_bw()
 
-urban_map_asia <- ggplot(asia) +
+urban_map_africa <- ggplot(africa) +
   # geom_sf(aes(color) = HDI)) +
   geom_sf(aes(fill = Urban_population)) +
   theme_bw() 
 
-asia_map+urban_map_asia
+africa_map+urban_map_africa
 ```
+![Africa Urban Population](Africa_urban.png)
+
 
 #### Map of Urban Population of Asia
 
@@ -202,28 +204,32 @@ asia_map+urban_map_asia
 ```
 
 
+![Asia Urban Population](Asia_urban.png)
+
 #### Map of Urban Population of Americas
 
 ```{r, eval=FALSE, echo=TRUE}
-asia = world |> 
-  filter(continent == "Asia", !is.na(iso_a2)) %>% 
+america = world |> 
+  filter(continent == "America", !is.na(iso_a2)) %>% 
   dplyr::rename(Country = name_long) %>%
-  right_join(urban_pop_asia, by = "Country") %>% 
+  right_join(urban_pop_america, by = "Country") %>% 
   # dplyr::select(name, subregion, gdpPercap, HDI, pop_growth, urban_pop) %>% 
   st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
 
 
-asia_map<- ggplot(asia) +
+america_map<- ggplot(america) +
   geom_sf() +
   theme_bw()
-asia_map  
-urban_map_asia <- ggplot(asia) +
+america_map  
+urban_map_america <- ggplot(america) +
   # geom_sf(aes(color) = HDI)) +
   geom_sf(aes(fill = Urban_population)) +
   theme_bw() 
 
-asia_map+urban_map_asia
+america_map+urban_map_america
 ```
+![Americas Urban Population](Americas_urban.png)
+
 :::
 
 #### Agricultural Water Withdrawls and GDP 
@@ -310,11 +316,20 @@ ts_annual_freshwater
 ![Municipial Water Withdrawl from 1970 to 2015,Asia](Mucipial_withdrawal.png)
 
 **Interpretation**
-
+I chose Asian countries becuase it was the easiest to visualize in one plot. We can see that there is missing data for many countries up until 1995. I Also omitted India, because if it outlying measurements. 
 
 # Summary 
 
+Water scarcity is a growing concern in vulnerable countries that have predisposed risks due to climate change. Understanding the causes of these stressors--whether it be industrial, municipal or agricultural--is a step in the right direction to mitigate water scarcity. This project worked as a preliminary analysis to understand which stressor is most affecting LIFDCs. I focused on urbanization due to the fact that urban centers are a key part of a country's development. As LIFDCs work their way out of this label, urbanization will be key part in a populations climb from rural to urban. From the linear regression model, we can concluded that the relationship between urban population and water stress is inconclusive. There are other factors that affect water stress.
+
 # Limitations and Next Steps
+
+There is a lot of missing data for LIFDCs due to privatized water management systems and low resources. These countries also face violations to water rights therefore data is scarce and not published due to fear. The next steps would be a further investigation to missing data. A key part of water knowledge would be community based knowledge, although this analysis project may need to be scaled down.
+
+
 # References
+
+Hannah Ritchie and Max Roser (2018) - “Water Use and Stress” Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/water-use-stress' [Online Resource]
+
 
 
