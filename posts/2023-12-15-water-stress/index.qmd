@@ -227,7 +227,19 @@ Water stress categories are based on this percentage (% of withdrawals to renewa
 
 Before Running the linear regression model, I plotted the agricultural water withdrawal versus GDP per capital. I figured that GDP is could be an indicator of urbanization.
 
+```{r, eval=FALSE, echo=TRUE}
+ggplot(data = urban_pop_asia, aes(x = GDP, y = `Agricultural Water Withdrawal`)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Adjust the angle as needed
+  geom_text(aes(label = Country), vjust = -0.5, hjust = 1) +  # Adjust vjust and hjust as needed
+  labs(title = "Agricultural water withdrawals vs. GDP per capita, 2019",
+       x = "GDP per Capita",
+       y = "Annual freshwaer withdrawals, agricuture(% of total freshwater withdrawl)")
+```
+
 ![Agricultural water withdrawals vs. GDP per capita, 2019](withdrawal_asia.png)
+
+
 This premilniary plot shows that opposite of my prediction--that increased GDP would increase agricultural water withdrawal. **Overall, we see a negative correlation: agriculture's share of total water withdrawals tend to decrease at higher incomes.**
 
 The Asian LIFD countries in the plot(clustered around the upper left of the plot) used more water for agriculture. 
