@@ -13,7 +13,6 @@ output:
       toc_float: yes
 draft: false
 footnotes-hover: true
-output: html_document
 format: 
   html:
     code-fold: true
@@ -86,6 +85,25 @@ font_add_google(name = "Josefin Sans", family = "josefin")
 font_add_google(name = "Merriweather", family = "merriweather")
 font_add_google(name = "Karla", family = "karla")
 
+font_add(family = "fa-6-brands",
+         regular = here::here("fonts", "Font Awesome 6 Brands-Regular-400.otf"))
+font_add(family = "fa-6-regular",
+         regular = here::here("fonts", "Font Awesome 6 Free-Regular-400.otf")) 
+font_add(family = "fa-6-solid",
+         regular = here::here("fonts", "Font Awesome 6 Free-Solid-900.otf"))
+
+font_add(family = "fa-brands",
+         regular = here::here("fonts", "fa-brands-400.ttf"))
+font_add(family = "fa-regular",
+         regular = here::here("fonts", "fa-regular-400.ttf")) 
+font_add(family = "fa-solid",
+         regular = here::here("fonts", "fa-solid-900.ttf"))
+
+# frog icons ----
+black_leaf <- here("images", "black-leaf.jpg")
+green_leaf <- here("images", "green-leaf.png")
+
+
 library(raster)
 library(countrycode)
 
@@ -98,6 +116,8 @@ library(fmsb)
 library(stringr)
 
 library(emojifont)
+library(NatParksPalettes)
+
 library(waffle)
 ```
 
@@ -140,6 +160,15 @@ Here I simply read in the cleaned version of this `carbon_offsets `dataset.
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 carbon_offsets_clean <- read_csv(here("data","carbon_offsets_clean.csv"))
+
+# color palettes
+
+glacier = c("#01353D", "#088096", "#58B3C7", "#7AD4E4", "#B8FCFC")
+everglades = c("#345023", "#596C0B", "#83A102", "#003B68", "#426F86", "#7A712F")
+igauzufalls = c("#415521", "#97AD3D", "#4C3425", "#7F6552", "#5A8093", "#9FBAD3")
+olympic = c("#3A4330", "#426737", "#75871B", "#BAB97D", "#FDE16A", "#F9B40E", "#E88C23", "#A25933")
+
+  
 ```
 
 This graph for the gneral audience is suppose to show the general trend of how Credits Retired and Credits Remaining has changed over time. The Kyoto Protocol in 1997 was the first time that international participation in carbon markets started to become more commonplace. A carbon credit is retired once its benefit has taken place. That means it has been used and the carbon benefit it represents has been claimed by the entity that bought it. We see that there is a bigger proportion of Carbon Credits Retired than Credits Remaining Unused. Meaning the Carbon Credits are working as usual.
@@ -240,37 +269,50 @@ scopes_plot
 
 # Third Visualization 
 
+I want to investigate which countries are the ones with most carbon credits assigned. 
+
 ```{r, credits_issued_by_country_proportionally, message=FALSE, warning=FALSE}
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##                    line plot of credits remaining                        ----
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-# carbon_offsets_clean_issued <- carbon_offsets_clean %>% 
-#   group_by(country) %>%
-#   summarise(total_credits = sum(total_credits_issued, na.rm = TRUE)) 
-# 
-# 
-# top_10_values <- carbon_offsets_clean_issued %>%
-#   top_n(10, total_credits)
-# 
-# # If you want to keep only the rows with the top 10 values:
-# filtered_dataframe <- carbon_offsets_clean_issued %>%
-#   filter(total_credits %in% top_10_values$total_credits)
-# 
-# filtered_dataframe$label = fontawesome('fa-leaf')
-# 
-# ggplot(filtered_dataframe, aes(fill = country, values = total_credits)) +
-#   geom_waffle(n_rows = 20, flip = TRUE,make_proportional = TRUE, color = "white") +
-#   geom_text(aes(label=label), family='fontawesome-webfont')
-#   coord_equal() + 
-#   paletteer::scale_fill_paletteer_d("rcartocolor::Earth") +
-#   labs(title = "Which Country has the most Carbon Credits Issued?",
-#        subtitle = "This shows the TOP 10 Countries who account for the most credits issued since DATE ",
-#        caption = "caption") +
-#   theme_void() +
-#   theme(
-#     legend.position = "bottom",
-#     legend.title = element_blank()
-#   )
+# subsetted and calcu
+carbon_offsets_clean_issued <- carbon_offsets_clean %>%
+  group_by(country) %>%
+  summarise(total_credits = sum(total_credits_issued, na.rm = TRUE))
+
+top_7_values <- carbon_offsets_clean_issued %>%
+  top_n(7, total_credits)
+
+# If you want to keep only the rows with the top 10 values:
+filtered_dataframe <- carbon_offsets_clean_issued %>%
+  filter(total_credits %in% top_7_values$total_credits)
+
+
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##            waffle plot of credits issued to top 7 countries              ----
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ggplot(filtered_dataframe, aes(label = country, values = total_credits)) +
+  geom_pictogram(n_rows = 5, aes(colour = country), make_proportional = TRUE, family = "fa-solid", size = 7) +
+  coord_equal() +
+  # paletteer::scale_fill_paletteer_d("rcartocolor::Earth") +
+  labs(title = "Which Country has the most Carbon Credits Issued?",
+       subtitle = "This shows the TOP 10 Countries who account for the most credits issued since DATE ",
+       caption = "caption") +
+  scale_color_manual(
+    name = NULL, 
+    values = c("#0067A2", "#DFCB91", "#CB7223", "#289A84", "#7FA4C2", "#AF7E56", "#9BB655FF"),
+    labels = c("Brazil", "China", "India", "Indonesia", "Peru", "Turkey", "United States")) +
+  scale_label_pictogram(
+    name = NULL,
+    values = "leaf",
+labels = c("Brazil", "China", "India", "Indonesia", "Peru", "Turkey", "United States")) +  theme_enhance_waffle() +
+  theme_void() +
+  theme(
+    legend.text = element_text(size = 12),
+    legend.position = "bottom"
+  )
 ```
