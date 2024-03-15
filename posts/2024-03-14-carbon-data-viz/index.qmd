@@ -206,7 +206,6 @@ ggplot(credits_plot_long, aes(x = year_of_offset, y = credits, color = type)) +
     axis.text.x = element_text(angle = 45, hjust = 1), # Adjust angle and font family here
     legend.position = "none", 
     plot.subtitle = element_text(size = 11, face = "plain", color = "#555459", family = "karla"),
-    plot.caption = element_text(face = "italic"),
     axis.title.x = element_text(color = "#232226", size = 10, angle = 0, hjust = .5, vjust = 0, face = "bold"),
     axis.title.y = element_text(color = "#232226", size = 10, angle = 90, hjust = .5, vjust = .5, face = "bold"),
     aspect.ratio=3/10)
@@ -247,7 +246,6 @@ scopes_plot <- ggplot(scopes) +
         axis.text.y = element_text(color = "black"),
         legend.position = "none", 
         plot.subtitle = element_text(size = 11, face = "plain", color = "#555459", family = "karla", hjust = 0.5),
-        plot.caption = element_text(face = "italic"),
         axis.title.x = element_text(color = "black", size = 10, angle = 0, hjust = .5, vjust = 0, face = "bold"),
         axis.title.y = element_text(color = "black", size = 10, angle = 90, hjust = .5, vjust = .5, face = "bold"))
 
@@ -290,7 +288,7 @@ ggplot(filtered_dataframe, aes(label = country, values = total_credits)) +
   # paletteer::scale_fill_paletteer_d("rcartocolor::Earth") +
   labs(title = "Which Country has the most Carbon Credits Issued?",
        subtitle = "TOP 7 Countries who account for the most credits issued since DATE ",
-       caption = "caption") +
+       ) +
   scale_color_manual(
     name = NULL, 
     values = c("#0067A2", "#DFCB91", "#CB7223", "#289A84", "#7FA4C2", "#AF7E56", "#9BB655FF"),
