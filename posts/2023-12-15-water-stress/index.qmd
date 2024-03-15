@@ -31,13 +31,11 @@ a. challenge myself with missing data\
 b. stray away from Eurocentric studies that focus on Western development\
 c. Highlight countries of need\
 
-
 # Goal
 
 My overall question is: What are the biggest stressors of water resources for "low income food deficit countries?" Understanding what the water stressors are in each country
 
 ![Low Income Food Deficit Countries](LIFDC_2.png)
-
 
 # AQUASTAT Data
 
@@ -58,10 +56,9 @@ FAO's global Information System on Water and Agriculture can a new online platfo
 -   Linear Model Relationship between Water Stress and Urban Population Relationship between Cultivated area (arable land + permanent crops)
 -   Time Series Data Annual freshwater withdrawals, 2019
 
-
 **Data Cleaning**
 
-Althought the AQUASTAT dataset was very detailed, cleaning the data resulted in a challenge. Downloading the dataset from the online platform made, resulted in a dataset with a `Country`, `Variable`, and `Unit` column. Below is the data cleaning process. Essentially, I had to pivot the entire table and rejoin units with their variable. 
+Althought the AQUASTAT dataset was very detailed, cleaning the data resulted in a challenge. Downloading the dataset from the online platform made, resulted in a dataset with a `Country`, `Variable`, and `Unit` column. Below is the data cleaning process. Essentially, I had to pivot the entire table and rejoin units with their variable.
 
 ```{r, eval=FALSE, echo=TRUE}
 library(tidyverse)
@@ -140,7 +137,6 @@ water1
 
 I found that the countries that are labeld LIFDCs belong to 3 continents: Asia, Africa, and the Americas with the majority in the African Continent. Below are the countries and the relative Urban Population to each country by continent.
 
-
 #### Map of Urban Population of Asia
 
 ::: panel-tabset
@@ -166,8 +162,8 @@ urban_map_africa <- ggplot(africa) +
 
 africa_map+urban_map_africa
 ```
-![Africa Urban Population](Africa_urban.png)
 
+![Africa Urban Population](Africa_urban.png)
 
 #### Map of Urban Population of Asia
 
@@ -191,7 +187,6 @@ urban_map_asia <- ggplot(asia) +
 
 asia_map+urban_map_asia
 ```
-
 
 ![Asia Urban Population](Asia_urban.png)
 
@@ -217,10 +212,11 @@ urban_map_america <- ggplot(america) +
 
 america_map+urban_map_america
 ```
+
 ![Americas Urban Population](Americas_urban.png)
 :::
 
-#### Agricultural Water Withdrawls and GDP 
+#### Agricultural Water Withdrawls and GDP
 
 Water stress is defined based on the ratio of freshwater withdrawals to renewable freshwater resources. Water stress does not insinuate that a country has water shortages, but does give an indication of how close it maybe be to exceeding a water basin's renewable resources. If water withdrawals exceed available resources (i.e. greater than 100 percent) then a country is either extracting beyond the rate at which aquifers can be replenished, or has very high levels of desalinisation water generation (the conversion of seawater to freshwater using osmosis processes).
 
@@ -237,20 +233,17 @@ ggplot(data = urban_pop_asia, aes(x = GDP, y = `Agricultural Water Withdrawal`))
   theme_minimal()
 ```
 
-
 ![Agricultural water withdrawals vs. GDP per capita, 2019](withdrawal_asia.png)
-
 
 This premilniary plot shows that opposite of my prediction--that increased GDP would increase agricultural water withdrawal. **Overall, we see a negative correlation: agriculture's share of total water withdrawals tend to decrease at higher incomes.**
 
-The Asian LIFD countries in the plot(clustered around the upper left of the plot) used more water for agriculture. 
+The Asian LIFD countries in the plot(clustered around the upper left of the plot) used more water for agriculture.
 
 # Analysis - Linear Regression
 
 #### Relationship Between Urban Population and Water Stress in Asia
 
-
-For this analysis I **ran a linear regression to see if there was some relationship between urban population and water stress**. From previous knowledge, we can expect the highter the urban population, the more water stress we can expect. An increase in urban populations might exasperate water withrawals in cities. Droughts may be exasperated in more urban areas due to increase temperatures from urbanization, transportions, 
+For this analysis I **ran a linear regression to see if there was some relationship between urban population and water stress**. From previous knowledge, we can expect the highter the urban population, the more water stress we can expect. An increase in urban populations might exasperate water withrawals in cities. Droughts may be exasperated in more urban areas due to increase temperatures from urbanization, transportions,
 
 ```{r, eval=FALSE, echo=TRUE}
 water_select <- water1 %>% 
@@ -268,6 +261,7 @@ summary(water_stress_lm)
 **The linear model used here does not conclude to a definite conclusion.** The R-squared measurement of 2.7%. This was to be expected. From the EDA step, we saw a negative correlation between Agricultural water withdrawal and GDP. GDP is a fair indicator of urbanization therefore a low r-squared value seems to be on the right track.
 
 # Analysis - Time Series of Freshwater Withdrawls (Asia)
+
 Here, I atttempted to use a Time Series of the Freshwater and Municipial water withdrawals.
 
 Irrigation water withdrawal normally far exceeds the net irrigation water requirement because of water lost in its distribution from its source to the crops.
@@ -288,11 +282,9 @@ ts_annual_freshwater <- annual_freshwawter_withdrawls %>%
 ts_annual_freshwater 
 ```
 
-
 ![Fresh Water Withdrawal 1975 - 2019, Asia](Freshwater_withdrawal.png)
 
-**Interpretation**
-I chose Asian countries becuase it was the easiest to visualize in one plot. We can see that there is missing data for many countries up until 1995, therefore it makes for a 
+**Interpretation** I chose Asian countries becuase it was the easiest to visualize in one plot. We can see that there is missing data for many countries up until 1995, therefore it makes for a
 
 # Analysis - Time Series of Municipial Water Withdrawals (Asia)
 
@@ -316,10 +308,9 @@ ts_annual_freshwater
 
 ![Municipial Water Withdrawl from 1970 to 2015,Asia](Mucipial_withdrawal.png)
 
-**Interpretation**
-I chose Asian countries becuase it was the easiest to visualize in one plot. We can see that there is missing data for many countries up until 1995. I Also omitted India, because if it outlying measurements. 
+**Interpretation** I chose Asian countries becuase it was the easiest to visualize in one plot. We can see that there is missing data for many countries up until 1995. I Also omitted India, because if it outlying measurements.
 
-# Summary 
+# Summary
 
 Water scarcity is a growing concern in vulnerable countries that have predisposed risks due to climate change. Understanding the causes of these stressors--whether it be industrial, municipal or agricultural--is a step in the right direction to mitigate water scarcity. This project worked as a preliminary analysis to understand which stressor is most affecting LIFDCs. I focused on urbanization due to the fact that urban centers are a key part of a country's development. As LIFDCs work their way out of this label, urbanization will be key part in a populations climb from rural to urban. From the linear regression model, we can concluded that the relationship between urban population and water stress is inconclusive. There are other factors that affect water stress.
 
@@ -327,14 +318,10 @@ Water scarcity is a growing concern in vulnerable countries that have predispose
 
 There is a lot of missing data for LIFDCs due to privatized water management systems and low resources. These countries also face violations to water rights therefore data is scarce and not published due to fear. The next steps would be a further investigation to missing data. A key part of water knowledge would be community based knowledge, although this analysis project may need to be scaled down.
 
-
 # References
 
-Hannah Ritchie and Max Roser (2018)-“Water Use and Stress” Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/water-use-stress' [Online Resource]
+Hannah Ritchie and Max Roser (2018)-"Water Use and Stress" Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/water-use-stress' \[Online Resource\]
 
-(2021)-"AQUASTAT - FAO's Global Information System on Water and Agriculture" Published online at www.fao.org. Retrieved from: 'https://www.fao.org/aquastat/en/data-analysis/irrig-water-use/' [Online Resource]
+(2021)-"AQUASTAT - FAO's Global Information System on Water and Agriculture" Published online at www.fao.org. Retrieved from: 'https://www.fao.org/aquastat/en/data-analysis/irrig-water-use/' \[Online Resource\]
 
-(2021)-"AQUASTAT Dissemination System" Published online at www.fao.org. Retrieved from: 'https://data.apps.fao.org/aquastat/?lang=en' [Online Resource]
-
-
-
+(2021)-"AQUASTAT Dissemination System" Published online at www.fao.org. Retrieved from: 'https://data.apps.fao.org/aquastat/?lang=en' \[Online Resource\]

@@ -24,30 +24,28 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## ***Question: How did socioeconomic factors influence community recovery from 2021 power outages in Houston, Texas?***
 
- repo link \| https://github.com/Vanessa-Salgado/houston-blackout-lights-analysis
+repo link \| https://github.com/Vanessa-Salgado/houston-blackout-lights-analysis
 
 ### Background
 
 In February 2021, severe winter storms in the United States caused a major power outage in the state of Texas. The loss of power resulted in over 4.5 million homes and businesses left without power, and several deaths. This analysis uses remotely sensed night light data to assess the impact and distribution of these blackouts. Data from the U.S. Census Bureau will be added to investigate if socioeconomic factors affect the recovery of power within the community.
 
-
 ### Project objectives and methods
 
-In this analysis, I will be: 
-- estimating the number of homes in Houston that lost power as a result of the first two storms\
+In this analysis, I will be: - estimating the number of homes in Houston that lost power as a result of the first two storms\
 - investigating if socioeconomic factors are predictors of communities recovery from a power outage
 
 This analysis will rely on remotely-sensed night lights data acquired from the [Visible Infrared Imaging Radiometer Suite (VIIRS)](https://en.wikipedia.org/wiki/Visible_Infrared_Imaging_Radiometer_Suite) aboard the Suomi satellite. Specifically, we will use the VNP46A1 to identify variations in night lights before and after the storms as a method to identify areas that lost electrical power.
 
 ## Data
 
-#### Night lights 
+#### Night lights
 
 We use NASA's Worldview to explore the data around the day of the storm. There are several days with too much cloud cover to be useful, but 2021-02-07 and 2021-02-16 provide two clear, contrasting images to visualize the extent of the power outage in Texas.
 
 VIIRS data is distributed through NASA's [Level-1 and Atmospheric Archive & Distribution System Distributed Active Archive Center (LAADS DAAC)](https://ladsweb.modaps.eosdis.nasa.gov/). Many NASA Earth data products are distributed in 10x10 degree tiles in sinusoidal equal-area projection. Tiles are identified by their horizontal and vertical position in the grid. Houston lies on the border of tiles h08v05 and h08v06. We therefore need to download two tiles per date.
 
-#### Roads  `gis_osm_roads_free_1.gpkg`
+#### Roads `gis_osm_roads_free_1.gpkg`
 
 Typically highways account for a large portion of the night lights observable from space (see Google's [Earth at Night](https://earth.google.com/web/@27.44405464,-84.7693044,206.63660162a,8916361.52264659d,35y,0h,0t,0r/data=CiQSIhIgMGY3ZTJkYzdlOGExMTFlNjk5MGQ2ZjgxOGQ2OWE2ZTc)). To minimize falsely identifying areas with reduced traffic as areas without power, we will ignore areas near highways.
 
@@ -376,9 +374,7 @@ census_income_geom_cropped <- census_income_geom[houston_border_sf, op = st_inte
 
 ![](houston_blackout.png)
 
-
 # **Evaluate the distribution of median incomes of homes by blackout status**
-
 
 Included some summary statistics first.
 
@@ -396,6 +392,7 @@ census_Y_N_houston %>%
 ```
 
 Plot a histogram of median income for blackout or non-blackout regions.
+
 ```{r}
 
 ggplot(census_Y_N_houston, aes(median_income))+geom_histogram(aes(color = blackout, fill = blackout), bins = 50, fill = "white") + ggtitle("Distribution of median income of homes in Houston by blackout status") 
@@ -407,7 +404,7 @@ We found that 778 census tracts had been affected by Texas's 2021 energy crisis,
 
 The average median income for homes that experienced a blackout was \$70,939, slightly higher than the average median income for homes that didn't experience a blackout, which was \$67,859. It is important to note that 1) our factor of interest was median income within census tracts and that other socioeconomic factors could reveal unexplored spatial patterns, and that 2) weather conditions were not normalized to conduct this exercise, variable that could cause a different outcome.
 
-## References 
+## References
 
 \[1\] Ball, J. (Feb, 2021). The Texas Blackout is the Story of a Disaster Foretold. Texas Monthly. URL: <https://www.texasmonthly.com/news-politics/texas-blackout-preventable/>
 
