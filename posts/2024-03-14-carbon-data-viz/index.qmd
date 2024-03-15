@@ -309,6 +309,6 @@ labels = c("Brazil", "China", "India", "Indonesia", "Peru", "Turkey", "United St
 
 ## Infographic
 
-![](/images/How are Carbon Credits Distributed?-2.jpg)
+![](How are Carbon Credits Distributed?-2.jpg)
 
 Please look at a better Resolution Photo on my Github Repo : [How are Carbon Credits Distributed Infographic](https://github.com/Vanessa-Salgado/Vanessa-Salgado.github.io/blob/main/images/How%20are%20Carbon%20Credits%20Distributed%3F-2.pdf)
