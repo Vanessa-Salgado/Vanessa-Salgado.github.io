@@ -12,6 +12,12 @@ output:
       toc_depth: 4
       toc_float: yes
 draft: false
+footnotes-hover: true
+output: html_document
+format: 
+  html:
+    code-fold: true
+    code-summary: "View Code"
 ---
 
 ```{r, setup, include=FALSE}
