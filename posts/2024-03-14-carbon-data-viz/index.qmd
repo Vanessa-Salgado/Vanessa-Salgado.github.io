@@ -41,17 +41,12 @@ Combining the Voluntary Registry Offsets Data with another emissions data would 
 
 ### Reserach Questions
 
-1.  The main research question is to see : **Are climate credits an effective way to offset carbon emissions?**
+1.  The main research question is to see : **Are climate credits being distrubuted evenly?**
 
-I will create three separate visualizations that all answer the same question: How has the Carbon Market grown over the years per country ? and are they keeping up with the global emission reduction goals
+I will create three separate visualizations that same overall question: How has the Carbon Market grown over the years per country ? and are they keeping up with the global emission reduction goals
 
-How does the use of Carbon Credits differ per country?
+Each visualization below has been 
 
-The first visualization for a general audience (i.e. without domain expertise) -- this data visualization may be designed to prompt conversation, clearly display findings (without the use of jargon), display findings in an atypical but creative way, and / or may blend both art and science.
-
-The second visualization to be included in a paper, technical documentation, or report -- this visualization should tell a similar story, but can include much more detail, more data, more domain-specific language, etc.
-
-The third visualization that you could include in a presentation -- presenting data on slides often requires a slightly different approach -- we ask a lot of an audience (regardless of their familiarity with your domain) when we spend only \~60 sec on any given slide. It's often imperative to build up your visualizations, slide-by-slide, adding data layers bit-by-bit. Oftentimes, you will only present a subset of data on any given figure. Key takeaways should be clearly highlighted. For this visualization, consider how you would layer on data and what arrows / annotations you'd potentially animate in to make your messaging clear.
 
 ## Data
 
@@ -59,10 +54,6 @@ The third visualization that you could include in a presentation -- presenting d
     -   [Berkeley Voluntary Registry Offsets Database](https://gspp.berkeley.edu/research-and-impact/centers/cepp/projects/berkeley-carbon-trading-project/offsets-database): contains all carbon offset projects, credit issuances, and credit retirements listed globally by four major voluntary offset project registries
     -   [Data on CO2 and Greenhouse emissions](https://github.com/owid/co2-data) by Our World in Data
     -   [Raster Data](https://www.naturalearthdata.com/downloads/10m-raster-data/) provided by [Natural Earth](https://www.naturalearthdata.com)
-
-## Data Cleaning
-
-
 
 ```{r library-setup, message=FALSE, warning=FALSE}
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,9 +70,6 @@ library(here)
 library(forcats)
 
 library(showtext)
-
-font_add_google(name = "Ultra", family = "ultra")
-font_add_google(name = "Josefin Sans", family = "josefin")
 font_add_google(name = "Merriweather", family = "merriweather")
 font_add_google(name = "Karla", family = "karla")
 
@@ -98,10 +86,6 @@ font_add(family = "fa-regular",
          regular = here::here("fonts", "fa-regular-400.ttf")) 
 font_add(family = "fa-solid",
          regular = here::here("fonts", "fa-solid-900.ttf"))
-
-# frog icons ----
-black_leaf <- here("images", "black-leaf.jpg")
-green_leaf <- here("images", "green-leaf.png")
 
 
 library(raster)
@@ -120,6 +104,8 @@ library(NatParksPalettes)
 
 library(waffle)
 ```
+
+## Data Wrangling
 
 ```{r,data-cleaning, eval=FALSE, echo=TRUE}
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -171,7 +157,12 @@ olympic = c("#3A4330", "#426737", "#75871B", "#BAB97D", "#FDE16A", "#F9B40E", "#
   
 ```
 
-This graph for the gneral audience is suppose to show the general trend of how Credits Retired and Credits Remaining has changed over time. The Kyoto Protocol in 1997 was the first time that international participation in carbon markets started to become more commonplace. A carbon credit is retired once its benefit has taken place. That means it has been used and the carbon benefit it represents has been claimed by the entity that bought it. We see that there is a bigger proportion of Carbon Credits Retired than Credits Remaining Unused. Meaning the Carbon Credits are working as usual.
+# Creating Data Vizualizations
+
+### Carbon Credits Remaining versus Carbon Credits Initially Assigned 
+
+
+This graph is suppose to show the general trend of how Credits Retired and Credits Remaining has changed over time. The Kyoto Protocol in 1997 was the first time that international participation in carbon markets started to become more commonplace. A carbon credit is retired once its benefit has taken place. That means it has been used and the carbon benefit it represents has been claimed by the entity that bought it. We see that there is a bigger proportion of Carbon Credits Retired than Credits Remaining Unused. Meaning the Carbon Credits are working as usual.
 
 ```{r, message=FALSE, warning=FALSE}
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -213,38 +204,36 @@ ggplot(credits_plot_long, aes(x = year_of_offset, y = credits, color = type)) +
   labs(x = "Year of Offset", y = "Credits", color = NULL, 
     title = "<span style='color:#95C65CFF'>Carbon Credits Retired</span> \nand <span style='color:#4BA68C'>Carbon Credits Remaining</span> \nOver Time, 1997 - 2023", 
        subtitle = "Carbon credits, also known as carbon offsets, are permits that allow the owner to emit a certain\namount of carbon dioxide or other greenhouse gases. One credit permits the emission of \none ton of carbon dioxide or the equivalent in other greenhouse gases.\nCarbon credit: It is the difference between the carbon emissions allowed and actually emitted carbon") +
-  theme(plot.title = element_markdown(color = "#232226", size = 16, face = "bold", family = "merriweather"),
-        axis.text.x = element_text(angle = 45, hjust = 1), # Adjust angle and font family here
-        legend.position = "none", 
-        plot.subtitle = element_text(size = 11, face = "plain", color = "#555459", family = "karla"),
-        plot.caption = element_text(face = "italic"),
-        axis.title.x = element_text(color = "#232226", size = 10, angle = 0, hjust = .5, vjust = 0, face = "bold"),
-        axis.title.y = element_text(color = "#232226", size = 10, angle = 90, hjust = .5, vjust = .5, face = "bold"))
+  theme(
+    plot.title = element_markdown(color = "#232226", size = 16, face = "bold", family = "merriweather"),
+    axis.text.x = element_text(angle = 45, hjust = 1), # Adjust angle and font family here
+    legend.position = "none", 
+    plot.subtitle = element_text(size = 11, face = "plain", color = "#555459", family = "karla"),
+    plot.caption = element_text(face = "italic"),
+    axis.title.x = element_text(color = "#232226", size = 10, angle = 0, hjust = .5, vjust = 0, face = "bold"),
+    axis.title.y = element_text(color = "#232226", size = 10, angle = 90, hjust = .5, vjust = .5, face = "bold"),
+    aspect.ratio=3/10)
 
 ```
 
-## Second Visualization -
+### Credits 
 
-The second visualization to be included in a paper, technical documentation, or report -- this visualization should tell a similar story, but can include much more detail, more data, more domain-specific language, etc.
+This plot shows all of the scopes (major project categories) and how many carbon credits have been used by each project scope.
+As shown in the plot `Forest & Land Use` and `Renewable Engery`
 
 ```{r, message=FALSE, warning=FALSE}
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-##                          lollipop plot of scopes                         ----
+##                          col plot of scopes                         ----
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 scopes <- carbon_offsets_clean %>% 
   mutate(scope = as.factor(scope)) %>% 
   group_by(scope) %>% 
   summarize(total_credits = sum(total_credits_issued, na.rm = TRUE)) %>% 
   filter(total_credits != 0)
-  # pivot_wider(names_from = scope, values_from = total_credits) %>% 
-  # dplyr::select(!"NA")
 
 scopes_plot <- ggplot(scopes) + 
-  # Add bars to represent the cumulative track lengths
-  # str_wrap(region, 5) wraps the text so each line has at most 5 characters
-  # (but it doesn't break long words!)
-  # geom_col(aes( x = reorder(scope,total_credits),y = total_credits), position = "dodge2", show.legend = TRUE, alpha = .9) +
-  ggalt::geom_lollipop(aes( x = reorder(scope,total_credits),y = total_credits), color = "#9BB655FF", size = 1.5) +
+  #ggalt::geom_lollipop(aes( x = reorder(scope,total_credits),y = total_credits), color = "#9BB655FF", size = 1.5) +
+  geom_col(aes( x = reorder(scope,total_credits),y = total_credits), fill = "#9BB655FF", size = 1.5) +
   scale_y_continuous(labels = scales::comma, expand = c(0, 0)) +
   geom_text(aes(x = reorder(scope, total_credits), y = total_credits, label = total_credits),
             vjust = 0.7, color = "#232226", size = 3, hjust = -.1) +  
@@ -253,18 +242,22 @@ scopes_plot <- ggplot(scopes) +
        subtitle = "Scopes refers to the type of projects that aim to reduce emissions", 
        x = "Project Scope Category" ,
        y = "Credits Assigned to each Scope") +
+  
   coord_flip() +
   # Annotate custom scale inside plot
-  theme(plot.title = element_markdown(color = "#232226", size = 16, , family = "merriweather"),
+  theme(
+    plot.title = element_markdown(color = "#232226", size = 16, face = "bold", family = "merriweather", hjust = 0.5),
         axis.text.x = element_text(angle = 45, hjust = 1, family = "karla"), # Adjust angle and font family here
         axis.text.y = element_text(color = "black"),
         legend.position = "none", 
-        plot.subtitle = element_text(size = 11, face = "plain", color = "#555459", family = "karla"),
+        plot.subtitle = element_text(size = 11, face = "plain", color = "#555459", family = "karla", hjust = 0.5),
         plot.caption = element_text(face = "italic"),
         axis.title.x = element_text(color = "black", size = 10, angle = 0, hjust = .5, vjust = 0, face = "bold"),
         axis.title.y = element_text(color = "black", size = 10, angle = 90, hjust = .5, vjust = .5, face = "bold"))
 
 scopes_plot
+
+options(scopes_plot.width =6, scopes_plot.height =3)
 ```
 
 # Third Visualization 
@@ -300,7 +293,7 @@ ggplot(filtered_dataframe, aes(label = country, values = total_credits)) +
   coord_equal() +
   # paletteer::scale_fill_paletteer_d("rcartocolor::Earth") +
   labs(title = "Which Country has the most Carbon Credits Issued?",
-       subtitle = "This shows the TOP 10 Countries who account for the most credits issued since DATE ",
+       subtitle = "TOP 7 Countries who account for the most credits issued since DATE ",
        caption = "caption") +
   scale_color_manual(
     name = NULL, 
@@ -312,6 +305,9 @@ ggplot(filtered_dataframe, aes(label = country, values = total_credits)) +
 labels = c("Brazil", "China", "India", "Indonesia", "Peru", "Turkey", "United States")) +  theme_enhance_waffle() +
   theme_void() +
   theme(
+    plot.title = element_markdown(color = "#232226", size = 16, face = "bold", family = "merriweather", hjust = 0.5 ),
+    plot.subtitle = element_text(size = 11, face = "plain", color = "#555459", family = "karla", hjust = 0.5, margin(t = 5, r = 1, b = 5, l = , unit = "cm")),
+
     legend.text = element_text(size = 12),
     legend.position = "bottom"
   )
