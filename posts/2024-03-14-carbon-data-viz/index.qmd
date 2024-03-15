@@ -45,8 +45,7 @@ Combining the Voluntary Registry Offsets Data with another emissions data would 
 
 I will create three separate visualizations that same overall question: How has the Carbon Market grown over the years per country ? and are they keeping up with the global emission reduction goals
 
-Each visualization below has been 
-
+Each visualization below has been
 
 ## Data
 
@@ -137,9 +136,8 @@ carbon_offsets_clean_df <- carbon_offsets_clean %>%
 
 ```
 
+After data cleaning, I saved the cleaned dataset so that I would not have to run the cleaning script everytime. Here I simply read in the cleaned version of this `carbon_offsets`dataset.
 
-After data cleaning, I saved the cleaned dataset so that I would not have to run the cleaning script everytime. 
-Here I simply read in the cleaned version of this `carbon_offsets `dataset. 
 ```{r, message=FALSE, warning=FALSE}
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##                          importing data                      ----
@@ -157,10 +155,9 @@ olympic = c("#3A4330", "#426737", "#75871B", "#BAB97D", "#FDE16A", "#F9B40E", "#
   
 ```
 
-# Creating Data Vizualizations
+# Creating Data Visualizations
 
-### Carbon Credits Remaining versus Carbon Credits Initially Assigned 
-
+### Carbon Credits Remaining versus Carbon Credits Initially Assigned
 
 This graph is suppose to show the general trend of how Credits Retired and Credits Remaining has changed over time. The Kyoto Protocol in 1997 was the first time that international participation in carbon markets started to become more commonplace. A carbon credit is retired once its benefit has taken place. That means it has been used and the carbon benefit it represents has been claimed by the entity that bought it. We see that there is a bigger proportion of Carbon Credits Retired than Credits Remaining Unused. Meaning the Carbon Credits are working as usual.
 
@@ -216,10 +213,9 @@ ggplot(credits_plot_long, aes(x = year_of_offset, y = credits, color = type)) +
 
 ```
 
-### Credits 
+### Credits
 
-This plot shows all of the scopes (major project categories) and how many carbon credits have been used by each project scope.
-As shown in the plot `Forest & Land Use` and `Renewable Engery`
+This plot shows all of the scopes (major project categories) and how many carbon credits have been used by each project scope. As shown in the plot `Forest & Land Use` and `Renewable Engery`
 
 ```{r, message=FALSE, warning=FALSE}
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -260,9 +256,9 @@ scopes_plot
 options(scopes_plot.width =6, scopes_plot.height =3)
 ```
 
-# Third Visualization 
+# Waffle Plot of Credits Issued to Top 7 Countries
 
-I want to investigate which countries are the ones with most carbon credits assigned. 
+I want to investigate which countries are the ones with most carbon credits assigned.
 
 ```{r, credits_issued_by_country_proportionally, message=FALSE, warning=FALSE}
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -312,3 +308,9 @@ labels = c("Brazil", "China", "India", "Indonesia", "Peru", "Turkey", "United St
     legend.position = "bottom"
   )
 ```
+
+## Infographic
+
+![](/images/How are Carbon Credits Distributed?-2.jpg)
+
+Please look at a better Resolution Photo on my Github Repo : [How are Carbon Credits Distributed Infographic](https://github.com/Vanessa-Salgado/Vanessa-Salgado.github.io/blob/main/images/How%20are%20Carbon%20Credits%20Distributed%3F-2.pdf)
