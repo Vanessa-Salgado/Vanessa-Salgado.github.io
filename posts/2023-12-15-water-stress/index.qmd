@@ -256,7 +256,7 @@ water_stress_lm <- lm(` Water Stress_%` ~ `Urban population_1000 inhab`, data = 
 summary(water_stress_lm)
 ```
 
-![Linear Model](linear_mod.png)
+at
 
 **The linear model used here does not conclude to a definite conclusion.** The R-squared measurement of 2.7%. This was to be expected. From the EDA step, we saw a negative correlation between Agricultural water withdrawal and GDP. GDP is a fair indicator of urbanization therefore a low r-squared value seems to be on the right track.
 

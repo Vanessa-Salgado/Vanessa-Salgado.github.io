@@ -14,22 +14,12 @@ about:
       href: mailto:vanessalgadoz@gmail.com
 ---
 
-:::{#hero-heading}
-
-
+::: {#hero-heading}
 ## Welcome
 
-Hi! My name is Vanessa Salgado. 
+Hi! My name is Vanessa Salgado.
 
 ## Education
 
-University of California, Santa Barbara | Santa Barbara, CA
-MEDS at Bren School of Environmental Science & Management 
-
-
-
-
-
-
+University of California, Santa Barbara \| Santa Barbara, CA MEDS at Bren School of Environmental Science & Management
 :::
-

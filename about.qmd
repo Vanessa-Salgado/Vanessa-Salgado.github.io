@@ -2,14 +2,34 @@
 title: "About Me"
 ---
 
-### Coming Soon!
+## Hobbies
 
-**Hobbies:**
+I enjoy a concoction of hobbies at any given time but I am persistent on learning french, finding the next hidden gem at the thrift store and trying out new sports.
 
-* Learning French
+Things I enjoy to slow things down are reading and trying out new recipes. Things I learned a long they way that I am not the greatest baker.
 
-* Trying out new sports
+## Eductional Background
 
-* Thrifting 
+Master of Environmental Data Science - University of California, Santa Barbara (June 2024)
 
-* Learning how to recreate My Mom's Mexican Dishes
+B.S Computer Science 2022
+
+
+##  Current Fascinations 
+
+::: panel-tabset
+
+## Digital Photos
+
+Throwing it back to the Y2K era and bringing back digital cameras. 
+
+## Foster Cat
+
+I'm fostering 8 year old Biscuit that has been at the ASAP Cats shelter. He's looking for a forever home. 
+
+## Step Competition
+
+Yet another way to scratch my competive itch. My friend discovered this Step Count App that lets you see how each person step counts varies on a simple leaderboard. I'm currently 
+
+:::
+
