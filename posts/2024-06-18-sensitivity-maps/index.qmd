@@ -1,5 +1,5 @@
 ---
-title: 'Capstone Project: Mapping Tree Drought Sensitivty in Climate Change'
+title: "Master's Capstone Project: Mapping Tress Species Drought Sensitivity Under Climate Change "
 description: ''
 author: "Vanessa Salgado"
 date: "2024-03-11"
@@ -19,6 +19,13 @@ format:
     code-summary: "View Code"
 ---
 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+![](cropped-mortality-morrow-rock.jpg)
+
 ## Background 
 
 Forests cover approximately 30% of Earth’s land surface, absorb more carbon than all other terrestrial ecosystems, and provide trillions of dollars’ worth of ecosystem services (Food and Agriculture Organization of the United Nations, 2005). However, forests are increasingly threatened by climate change-induced shifts in drought frequency and severity. As temperatures inceases, it is critical to develop effective management strategies and identify techniques to prioritize management interventions. For example, developing cutting-edge models that can identify regions within a species’ range that are more vulnerable to drought can bolster restoration efforts, particularly for threatened species and species exposed to frequent droughts.
@@ -31,11 +38,11 @@ We hope this dashboard can act as a tool for land management partners to identif
 
 <!-- Screenshots   -->
 
-A live website of the dashbaord is hosted by the Bren School of Environmental Management 
+A live website of the dashbaord is hosted by the Bren School of Environmental Management. It is currently live here: 
 
-## 26 species mapped on a dashbaord 
+## What I learned on this project
 
 
-# 
+## What 
 
 
