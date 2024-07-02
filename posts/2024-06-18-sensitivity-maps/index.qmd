@@ -30,14 +30,36 @@ We hope this dashboard can act as a tool for land management partners to identif
 
 ## Data
 
-This workflow builds off the existing framework developed by our client Dr. Joan Dudney, and her colleagues Dr. Robert Heilmayr, and Dr. Frances C Moore. Original code scripts and available at the following repository: GitHub Repository - Treeconomics (opens in new window) Raw data derivation: Raw data was accessed from the following public sources: 1. Tree ring data - International Tree Ring Data Bank (opens in new window) Date of Access: 2020-07-05 Version: ITRDB v.7.22 2. Climate data - Terra Climate (opens in new window) Date of Access: 2024-04-02 Version: Annual data (1958-present)
+This workflow builds off the existing framework developed by our client Dr. Joan Dudney, and her colleagues Dr. Robert Heilmayr, and Dr. Frances C Moore. Original code scripts and available at the following repository: GitHub Repository - [Treeconomics](https://github.com/rheilmayr/Treeconomics)
+
+Raw data was accessed from the following public sources: 
+
+1. Tree ring data - [International Tree Ring Data Bank](https://www.ncei.noaa.gov/products/paleoclimatology/tree-ring)
+- Date of Access: 2020-07-05 
+- Version: ITRDB v.7.22 
+
+2. Climate data - [Terra Climate](https://www.climatologylab.org/terraclimate.html)
+- Date of Access: 2024-04-02
+- Version: Annual data (1958-present)
 
 ## Reinterpreting Tree Sensitivty Scales
 
-A live website of the dashboard is hosted by the Bren School of Environmental Management. It is currently live here:
+A live website of the dashboard is hosted by the Bren School of Environmental Management. Visit our live dashboard [here](https://shinyapps.bren.ucsb.edu/climatree/)
 
 Within the dashboard, we used the R {leaflet} package to plot the interactive maps. The coordinate reference system is set to WGS84. The original sensitivity maps had a continuous scale of sensitivity ranging from negative to postive numbers. In order to increase interpretation of sensitivity maps, the categorical bins and orange-blue color palettes were create in order to signal sensitivty or non-senstivty. Therefore, any positive values of sensitivty mean these are species of little to no concern. The Negative scale was divided into quantiles of High, Moderate, and Low Sensitivty which takes in either three or four colors depending on the levels of sensitivity found in the dataset.
 
 ## Dashboard
 
-The Interactive Dashboard
+The Interactive Dashboard was built using R, R {Shiny} package, and {Leaflet} package. The intention of this dashboard is too choose a tree species of interest either by species code, common name or scientific name, and map the raster map of sensitivty values for each map. You can see how sensitivty ranges from tree to tree. Another feature I added was changing map tiles and transparency to better visualize the raster maps. 
+
+Below is a short video of our dashboard.
+
+![](Dashboard_1.png)
+
+# Project Documentation 
+
+[Spatial Analysis Mapping Repository](https://github.com/ClimaTree/)
+
+[Interactive Dashboard Repository](https://github.com/ClimaTree/climatree-shiny-dev/tree/main)
+
+[Dyad Reproducble Workflow](https://datadryad.org/stash/dataset/doi:10.5061/dryad.m905qfv97)
