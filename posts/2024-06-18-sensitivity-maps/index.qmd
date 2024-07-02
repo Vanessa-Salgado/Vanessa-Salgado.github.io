@@ -3,31 +3,20 @@ title: "Master's Capstone Project: Mapping Tress Species Drought Sensitivity Und
 description: ''
 author: "Vanessa Salgado"
 date: "2024-07-1"
-code-fold: true 
-toc: true
-output:
-    html_document:
-      print_df: paged
-      toc: yes
-      toc_depth: 4
-      toc_float: yes
 draft: false
-footnotes-hover: true
-format: 
-  html:
-    code-fold: true
-    code-summary: "View Code"
 ---
 
-```{r, setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-![](cropped-mortality-morrow-rock.jpg) \## Master Project
+![](cropped-mortality-morrow-rock.jpg)
 
-These past 6 months have been an exciting time of working with Bren Professor Dr. Joan Dudney and 3 amazing Bren Master students to understand how tree sensitivty will look in the future in response to conditions of cliamte change. Digging deep into dendrochonology, linear regression and spatial analysis has been an exciting opportunity to showcase and put an end my Master career. Our goal was to map intra-species tree sensitivty to drought and create an interactive dashboard for local stakeholders to use out tool to target conservation efforts. 
+# Master Project
 
+These past 6 months have been an exciting time of working with Bren Professor Dr. Joan Dudney and 3 amazing Bren Master students to understand how tree sensitivty will look in the future in response to conditions of cliamte change. Digging deep into dendrochonology, linear regression and spatial analysis has been an exciting opportunity to showcase and put an end my Master career. Our goal was to map intra-species tree sensitivty to drought and create an interactive dashboard for local stakeholders to use out tool to target conservation efforts.
 
+## Tools Used
 
 ## Tree Sensitivty Background
 
@@ -38,8 +27,6 @@ Forests cover approximately 30% of Earth's land surface, absorb more carbon than
 The Mapping Tree Sensitivity Dashboard assses species-specific sensitivity to drought by quantifying variation in drought-sensitivity across tree species' ranges. This localized information is citical for land managers to develop targeted drought-adaptation strategies. By analyzing variation in drought-sensitivity for 26 tree species, we demonstrate that th eimpacts of drier conditions vary by species and across species' ranges. Our findings suggest that effective management strategies will need to consider species-level variation in drought sensitivity to sustain ecosystem services under climate change.
 
 We hope this dashboard can act as a tool for land management partners to identify regions where management interventions may be needed under climate change
-
-<!-- Screenshots   -->
 
 ## Data
 
@@ -53,6 +40,4 @@ Within the dashboard, we used the R {leaflet} package to plot the interactive ma
 
 ## Dashboard
 
-The Interactive Dashboard 
-
-## What
+The Interactive Dashboard
