@@ -13,9 +13,9 @@ This website is a work in progress, and I hope to update with each milestone or 
 
 Master of Environmental Data Science - University of California, Santa Barbara (June 2024)
 
-University of California, Santa Barbara B.S Computer Science 2022
+B.S Computer Science 2022 - University of California, Santa Barbara 
 
-## Current Fascinations
+## Current Projects
 
 ::: panel-tabset
 ## Camera Business

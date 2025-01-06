@@ -142,12 +142,13 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#master-project" id="toc-master-project" class="nav-link active" data-scroll-target="#master-project">Master Project</a>
   <ul class="collapse">
   <li><a href="#tools-used" id="toc-tools-used" class="nav-link" data-scroll-target="#tools-used">Tools Used</a></li>
-  <li><a href="#tree-sensitivty-background" id="toc-tree-sensitivty-background" class="nav-link" data-scroll-target="#tree-sensitivty-background">Tree Sensitivty Background</a></li>
+  <li><a href="#tree-sensitivity-background" id="toc-tree-sensitivity-background" class="nav-link" data-scroll-target="#tree-sensitivity-background">Tree Sensitivity Background</a></li>
   <li><a href="#mapping-tree-sensitivty-dashboard" id="toc-mapping-tree-sensitivty-dashboard" class="nav-link" data-scroll-target="#mapping-tree-sensitivty-dashboard">Mapping Tree Sensitivty Dashboard</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#reinterpreting-tree-sensitivty-scales" id="toc-reinterpreting-tree-sensitivty-scales" class="nav-link" data-scroll-target="#reinterpreting-tree-sensitivty-scales">Reinterpreting Tree Sensitivty Scales</a></li>
   <li><a href="#dashboard" id="toc-dashboard" class="nav-link" data-scroll-target="#dashboard">Dashboard</a></li>
   </ul></li>
+  <li><a href="#project-documentation" id="toc-project-documentation" class="nav-link" data-scroll-target="#project-documentation">Project Documentation</a></li>
   </ul>
 </nav>
     </div>
@@ -160,12 +161,12 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="cropped-mortality-morrow-rock.jpg" class="img-fluid"></p>
 <section id="master-project" class="level1">
 <h1>Master Project</h1>
-<p>These past 6 months have been an exciting time of working with Bren Professor Dr.&nbsp;Joan Dudney and 3 amazing Bren Master students to understand how tree sensitivty will look in the future in response to conditions of cliamte change. Digging deep into dendrochonology, linear regression and spatial analysis has been an exciting opportunity to showcase and put an end my Master career. Our goal was to map intra-species tree sensitivty to drought and create an interactive dashboard for local stakeholders to use out tool to target conservation efforts.</p>
+<p>These past 6 months have been an exciting time of working with Bren Professor Dr.&nbsp;Joan Dudney and 3 amazing Bren Master students to understand how tree sensitivty will look in the future in response to conditions of cliamte change. Digging deep into dendrochonology, linear regression and spatial analysis has been an exciting opportunity to showcase and put an end my Master career. Our goal was to map intra-species tree sensitivity to drought and create an interactive dashboard for local stakeholders to use out tool to target conservation efforts.</p>
 <section id="tools-used" class="level2">
 <h2 class="anchored" data-anchor-id="tools-used">Tools Used</h2>
 </section>
-<section id="tree-sensitivty-background" class="level2">
-<h2 class="anchored" data-anchor-id="tree-sensitivty-background">Tree Sensitivty Background</h2>
+<section id="tree-sensitivity-background" class="level2">
+<h2 class="anchored" data-anchor-id="tree-sensitivity-background">Tree Sensitivity Background</h2>
 <p>Forests cover approximately 30% of Earth’s land surface, absorb more carbon than all other terrestrial ecosystems, and provide trillions of dollars’ worth of ecosystem services (Food and Agriculture Organization of the United Nations, 2005). However, forests are increasingly threatened by climate change-induced shifts in drought frequency and severity. As temperatures inceases, it is critical to develop effective management strategies and identify techniques to prioritize management interventions. For example, developing cutting-edge models that can identify regions within a species’ range that are more vulnerable to drought can bolster restoration efforts, particularly for threatened species and species exposed to frequent droughts.</p>
 </section>
 <section id="mapping-tree-sensitivty-dashboard" class="level2">
@@ -175,19 +176,42 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>This workflow builds off the existing framework developed by our client Dr.&nbsp;Joan Dudney, and her colleagues Dr.&nbsp;Robert Heilmayr, and Dr.&nbsp;Frances C Moore. Original code scripts and available at the following repository: GitHub Repository - Treeconomics (opens in new window) Raw data derivation: Raw data was accessed from the following public sources: 1. Tree ring data - International Tree Ring Data Bank (opens in new window) Date of Access: 2020-07-05 Version: ITRDB v.7.22 2. Climate data - Terra Climate (opens in new window) Date of Access: 2024-04-02 Version: Annual data (1958-present)</p>
+<p>This workflow builds off the existing framework developed by our client Dr.&nbsp;Joan Dudney, and her colleagues Dr.&nbsp;Robert Heilmayr, and Dr.&nbsp;Frances C Moore. Original code scripts and available at the following repository: GitHub Repository - <a href="https://github.com/rheilmayr/Treeconomics">Treeconomics</a></p>
+<p>Raw data was accessed from the following public sources:</p>
+<ol type="1">
+<li>Tree ring data - <a href="https://www.ncei.noaa.gov/products/paleoclimatology/tree-ring">International Tree Ring Data Bank</a></li>
+</ol>
+<ul>
+<li>Date of Access: 2020-07-05</li>
+<li>Version: ITRDB v.7.22</li>
+</ul>
+<ol start="2" type="1">
+<li>Climate data - <a href="https://www.climatologylab.org/terraclimate.html">Terra Climate</a></li>
+</ol>
+<ul>
+<li>Date of Access: 2024-04-02</li>
+<li>Version: Annual data (1958-present)</li>
+</ul>
 </section>
 <section id="reinterpreting-tree-sensitivty-scales" class="level2">
 <h2 class="anchored" data-anchor-id="reinterpreting-tree-sensitivty-scales">Reinterpreting Tree Sensitivty Scales</h2>
-<p>A live website of the dashboard is hosted by the Bren School of Environmental Management. It is currently live here:</p>
+<p>A live website of the dashboard is hosted by the Bren School of Environmental Management. Visit our live dashboard <a href="https://shinyapps.bren.ucsb.edu/climatree/">here</a></p>
 <p>Within the dashboard, we used the R {leaflet} package to plot the interactive maps. The coordinate reference system is set to WGS84. The original sensitivity maps had a continuous scale of sensitivity ranging from negative to postive numbers. In order to increase interpretation of sensitivity maps, the categorical bins and orange-blue color palettes were create in order to signal sensitivty or non-senstivty. Therefore, any positive values of sensitivty mean these are species of little to no concern. The Negative scale was divided into quantiles of High, Moderate, and Low Sensitivty which takes in either three or four colors depending on the levels of sensitivity found in the dataset.</p>
 </section>
 <section id="dashboard" class="level2">
 <h2 class="anchored" data-anchor-id="dashboard">Dashboard</h2>
-<p>The Interactive Dashboard</p>
-
-
+<p>The Interactive Dashboard was built using R, R {Shiny} package, and {Leaflet} package. The intention of this dashboard is too choose a tree species of interest either by species code, common name or scientific name, and map the raster map of sensitivty values for each map. You can see how sensitivty ranges from tree to tree. Another feature I added was changing map tiles and transparency to better visualize the raster maps.</p>
+<p>Below is a short video of our dashboard.</p>
+<p><img src="Dashboard_1.png" class="img-fluid"></p>
 </section>
+</section>
+<section id="project-documentation" class="level1">
+<h1>Project Documentation</h1>
+<p><a href="https://github.com/ClimaTree/">Spatial Analysis Mapping Repository</a></p>
+<p><a href="https://github.com/ClimaTree/climatree-shiny-dev/tree/main">Interactive Dashboard Repository</a></p>
+<p><a href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.m905qfv97">Dyad Reproducble Workflow</a></p>
+
+
 </section>
 
 </main> <!-- /main -->

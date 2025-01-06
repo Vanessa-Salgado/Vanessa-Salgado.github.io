@@ -2,9 +2,9 @@
   {
     "objectID": "posts.html",
     "href": "posts.html",
-    "title": "My Blog",
+    "title": "Blog Entries",
     "section": "",
-    "text": "Master’s Capstone Project: Mapping Tress Species Drought Sensitivity Under Climate Change\n\n\n\n\n\n\nVanessa Salgado\n\n\nJul 1, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nCarbon Credits Data Visualization\n\n\nAnalyzing the Distribution of Carbon Credits between Countries\n\n\n\nVanessa Salgado\n\n\nMar 11, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWater Stressors for Low Income Food Deficit Countries\n\n\n\nMEDS\n\n\nR\n\n\nStatistics\n\n\n\nExamining Water Use and Water Stress. Comparing Industrial, Irrigation, and Municipial Water Withdrawals\n\n\n\nVanessa Salgado\n\n\nDec 15, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n2021 Texas Blackout\n\n\nAnalyzing affected areas & socioeconomic factors that influenced recovery\n\n\n\nVanessa Salgado\n\n\nDec 15, 2023\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Presidential Sentiment Analysis Project\n\n\n\n\n\nHow Do Different Sources of Media Impact an Opinion\n\n\n\n\n\n\nJan 5, 2025\n\n\nVanessa Salgado\n\n\n\n\n\n\n  \n\n\n\n\nMaster’s Capstone Project: Mapping Tress Species Drought Sensitivity Under Climate Change\n\n\n\n\n\n\n\n\n\n\n\n\nJul 1, 2024\n\n\nVanessa Salgado\n\n\n\n\n\n\n  \n\n\n\n\nCarbon Credits Data Visualization\n\n\n\n\n\nAnalyzing the Distribution of Carbon Credits between Countries\n\n\n\n\n\n\nMar 11, 2024\n\n\nVanessa Salgado\n\n\n\n\n\n\n  \n\n\n\n\nWater Stressors for Low Income Food Deficit Countries\n\n\n\n\n\n\n\nMEDS\n\n\nR\n\n\nStatistics\n\n\n\n\nExamining Water Use and Water Stress. Comparing Industrial, Irrigation, and Municipial Water Withdrawals\n\n\n\n\n\n\nDec 15, 2023\n\n\nVanessa Salgado\n\n\n\n\n\n\n  \n\n\n\n\n2021 Texas Blackout\n\n\n\n\n\nAnalyzing affected areas & socioeconomic factors that influenced recovery\n\n\n\n\n\n\nDec 15, 2023\n\n\nVanessa Salgado\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -116,21 +116,21 @@
     "href": "posts/2024-06-18-sensitivity-maps/index.html#data",
     "title": "Master’s Capstone Project: Mapping Tress Species Drought Sensitivity Under Climate Change",
     "section": "Data",
-    "text": "Data\nThis workflow builds off the existing framework developed by our client Dr. Joan Dudney, and her colleagues Dr. Robert Heilmayr, and Dr. Frances C Moore. Original code scripts and available at the following repository: GitHub Repository - Treeconomics (opens in new window) Raw data derivation: Raw data was accessed from the following public sources: 1. Tree ring data - International Tree Ring Data Bank (opens in new window) Date of Access: 2020-07-05 Version: ITRDB v.7.22 2. Climate data - Terra Climate (opens in new window) Date of Access: 2024-04-02 Version: Annual data (1958-present)"
+    "text": "Data\nThis workflow builds off the existing framework developed by our client Dr. Joan Dudney, and her colleagues Dr. Robert Heilmayr, and Dr. Frances C Moore. Original code scripts and available at the following repository: GitHub Repository - Treeconomics\nRaw data was accessed from the following public sources:\n\nTree ring data - International Tree Ring Data Bank\n\n\nDate of Access: 2020-07-05\nVersion: ITRDB v.7.22\n\n\nClimate data - Terra Climate\n\n\nDate of Access: 2024-04-02\nVersion: Annual data (1958-present)"
   },
   {
     "objectID": "posts/2024-06-18-sensitivity-maps/index.html#reinterpreting-tree-sensitivty-scales",
     "href": "posts/2024-06-18-sensitivity-maps/index.html#reinterpreting-tree-sensitivty-scales",
     "title": "Master’s Capstone Project: Mapping Tress Species Drought Sensitivity Under Climate Change",
     "section": "Reinterpreting Tree Sensitivty Scales",
-    "text": "Reinterpreting Tree Sensitivty Scales\nA live website of the dashboard is hosted by the Bren School of Environmental Management. It is currently live here:\nWithin the dashboard, we used the R {leaflet} package to plot the interactive maps. The coordinate reference system is set to WGS84. The original sensitivity maps had a continuous scale of sensitivity ranging from negative to postive numbers. In order to increase interpretation of sensitivity maps, the categorical bins and orange-blue color palettes were create in order to signal sensitivty or non-senstivty. Therefore, any positive values of sensitivty mean these are species of little to no concern. The Negative scale was divided into quantiles of High, Moderate, and Low Sensitivty which takes in either three or four colors depending on the levels of sensitivity found in the dataset."
+    "text": "Reinterpreting Tree Sensitivty Scales\nA live website of the dashboard is hosted by the Bren School of Environmental Management. Visit our live dashboard here\nWithin the dashboard, we used the R {leaflet} package to plot the interactive maps. The coordinate reference system is set to WGS84. The original sensitivity maps had a continuous scale of sensitivity ranging from negative to postive numbers. In order to increase interpretation of sensitivity maps, the categorical bins and orange-blue color palettes were create in order to signal sensitivty or non-senstivty. Therefore, any positive values of sensitivty mean these are species of little to no concern. The Negative scale was divided into quantiles of High, Moderate, and Low Sensitivty which takes in either three or four colors depending on the levels of sensitivity found in the dataset."
   },
   {
     "objectID": "posts/2024-06-18-sensitivity-maps/index.html#dashboard",
     "href": "posts/2024-06-18-sensitivity-maps/index.html#dashboard",
     "title": "Master’s Capstone Project: Mapping Tress Species Drought Sensitivity Under Climate Change",
     "section": "Dashboard",
-    "text": "Dashboard\nThe Interactive Dashboard"
+    "text": "Dashboard\nThe Interactive Dashboard was built using R, R {Shiny} package, and {Leaflet} package. The intention of this dashboard is too choose a tree species of interest either by species code, common name or scientific name, and map the raster map of sensitivty values for each map. You can see how sensitivty ranges from tree to tree. Another feature I added was changing map tiles and transparency to better visualize the raster maps.\nBelow is a short video of our dashboard."
   },
   {
     "objectID": "posts/2023-12-15-water-stress/index.html",
@@ -186,7 +186,7 @@
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "I enjoy a concoction of hobbies at any given time but I am persistent on learning french, finding the next hidden gem at the thrift store and trying out new sports.\nThings I enjoy to slow things down are reading and trying out new recipes. Things I learned a long they way that I am not the greatest baker."
+    "text": "I am currently on the job search for Data Analytics or Database management in an environmental or social sphere in the larger Los Angeles metro area. Aside from job searching, I have started my own business selling vintage cameras and watches. I have more details on that below.\nThis website is a work in progress, and I hope to update with each milestone or progress on my projects."
   },
   {
     "objectID": "about.html#hobbies",
@@ -200,14 +200,14 @@
     "href": "about.html#eductional-background",
     "title": "About Me",
     "section": "Eductional Background",
-    "text": "Eductional Background\nMaster of Environmental Data Science - University of California, Santa Barbara (June 2024)\nB.S Computer Science 2022"
+    "text": "Eductional Background\nMaster of Environmental Data Science - University of California, Santa Barbara (June 2024)\nB.S Computer Science 2022 - University of California, Santa Barbara"
   },
   {
     "objectID": "about.html#current-fascinations",
     "href": "about.html#current-fascinations",
     "title": "About Me",
     "section": "Current Fascinations",
-    "text": "Current Fascinations\n\nDigital PhotosFoster CatStep Competition\n\n\nThrowing it back to the Y2K era and bringing back digital cameras.\n\n\nI’m fostering 8 year old Biscuit that has been at the ASAP Cats shelter. He’s looking for a forever home.\n\n\nYet another way to scratch my competive itch. My friend discovered this Step Count App that lets you see how each person step counts varies on a simple leaderboard. I’m currently"
+    "text": "Current Fascinations\n\nCamera BusinessVintage Watch BusinessProductivity App\n\n\nMy partner and I started this vintage camera business as a subdivision of his vintage reselling business. We resell 2000s cameras and film cameras to those who also want to capture memories through a vintage lens. You can find us on instagram @MomentsOnDigi or at local LA flea markets.\n\n\nI love going to flea markets and I always seem to find the prettiest, daintiest watches. I would always get compliments on watches and wanted to share my love for watches at flea markets as well or on Etsy!"
   },
   {
     "objectID": "posts/CopyOf2024-06-18-sensitivity-maps-copy/index.html#tools-used",
@@ -250,5 +250,26 @@
     "title": "Master’s Capstone Project: Mapping Tress Species Drought Sensitivity Under Climate Change",
     "section": "Dashboard",
     "text": "Dashboard\nThe Interactive Dashboard"
+  },
+  {
+    "objectID": "posts/2025-01-05-prez-analysis/index.html",
+    "href": "posts/2025-01-05-prez-analysis/index.html",
+    "title": "Presidential Sentiment Analysis Project",
+    "section": "",
+    "text": "This project was created by both me and Alan Feria. Using data analysis and machine learning algorithms, we hope to explore the sentiment and opinions of presidential candidates with a data lens. Our github can be found here.\n\nProject Summary\nOur project aims to use text analysis to examine the sentiment surrounding the 2024 Presidential and Vice-Presidential candidates found in news outlets and social media leading up to the presidential election on November 2nd. We will do this by using sentiment analysis and examining the reliability of online text information. We will also create an AI bot that will use the online news and social media text to generate its own opinion based on web-scraped information. Our overall question is: How do different sources of media impact a voter’s view & opinion on the 2024 presidential election?\n\n\nProblem Description\nAs the 2024 election approaches, misinformation and biased reporting on platforms like X, Instagram, and traditional outlets such as CNN, ABC, and Fox. This spread of information complicates public understanding. Our project aims to create user-friendly tools that evaluate the reliability of these sources while creating an AI bot that generates its own opinion based on these informational sources. We’ll explore how AI can generate informed perspectives on the election’s developments and how different news sources may impact a voter’s perspective on the election.\n\n\nProject Goals\n\nDevelop a robust full stack system that inputs, stores, and visualizes voter opinion across various sources, including new articles and social media posts.\nDesign an algorithm that analyzes sites based on multiple factors and assigns a credibility score to each source.\nDevelop a modular AI bot that generates its own opinion based on scraped data across different platforms.\nDevelop an interactive dashboard that enables users to explore and visualize sentiment and opinion data in a user-friendly interface.\n\n\n\nTimeline\nWe created this timeline to keep our team on track with the project goals.\n\nData Collection & Preprocessing\n\nIdentify and web scrape relevant text data from various news outlets and social media platforms (e.g., X, Instagram, CNN, Fox).\nClean and preprocess the data, including tokenization, noise removal , and other text normalization techniques.\nDevelop a data pipeline to ensure continuous data collection leading up to the election.\n\n\n\nSentiment Analysis Implementation\n\nImplement sentiment analysis algorithms to assess the sentiment in the collected texts, using tools like VADER, TextBlob, or machine learning-based models.\nCreate visualizations to represent the sentiment trends over time for each candidate and media source.\nBegin preliminary analysis to identify patterns in sentiment across different media sources.\n\n\n\nAI Bot Development\n\nDevelop and train the AI bot to generate opinions based on the collected and analyzed data.\nTest the bot’s opinion generation capabilities, refining the model based on a ccuracy and relevance.\n\n\n\nReliability Assessment & Media Impact Analysis\n\nDevelop a framework to evaluate the reliability of different media sources, possibly using metrics such as source credibility, historical accuracy, and bias detection.\nAnalyze the relationship between media source reliability and voter sentiment, exploring how misinformation or bias might skew public opinion\n\n\n\nDashboard Development\n\nIntegrate all components into a cohesive tool or platform, ensuring seamless interaction between the sentiment analysis, AI bot, and reliability assessments.\n\n\n\n\nCurrent Progress\nData Collection and Preprocessing\nUsing Python and Selenium, tweets from both Donald Trump and Kamala Harris and popular hashtags such as #PresidentialDebate2024, #MAGA2024, and #KamalaHarris2024 were scraped. About 10,000+ enteries were obtained during critical election periods such as presidential debates, government news, and/or policy changes.\nMy main contribution was creating a X, formerly Twitter, scraper to obtian tweets from both candidates and hashtags metioned above. Web scraping data needed to be done through the course of a week to not let X discover my automate Selenium bot. Each data entry had critical information such as author, time, content, hashtags.\nCleaning the data was a critical step, entries were duplicated becuase of tweet replies. In order to prepare data for sentiment analysis, the text of the tweets needed to be void of repetitive, non-meaningful words such as an, the, a, it, etc. and punctuation. The R packages {tokenizers}, {tidyverse} and {tidytext} were used to tokenize the body of tweets.\nProgress is pending…"
+  },
+  {
+    "objectID": "posts/2024-06-18-sensitivity-maps/index.html#tree-sensitivity-background",
+    "href": "posts/2024-06-18-sensitivity-maps/index.html#tree-sensitivity-background",
+    "title": "Master’s Capstone Project: Mapping Tress Species Drought Sensitivity Under Climate Change",
+    "section": "Tree Sensitivity Background",
+    "text": "Tree Sensitivity Background\nForests cover approximately 30% of Earth’s land surface, absorb more carbon than all other terrestrial ecosystems, and provide trillions of dollars’ worth of ecosystem services (Food and Agriculture Organization of the United Nations, 2005). However, forests are increasingly threatened by climate change-induced shifts in drought frequency and severity. As temperatures inceases, it is critical to develop effective management strategies and identify techniques to prioritize management interventions. For example, developing cutting-edge models that can identify regions within a species’ range that are more vulnerable to drought can bolster restoration efforts, particularly for threatened species and species exposed to frequent droughts."
+  },
+  {
+    "objectID": "about.html#currently",
+    "href": "about.html#currently",
+    "title": "About Me",
+    "section": "",
+    "text": "I am currently on the job search for Data Analytics or Database management in an environmental or social sphere in the larger Los Angeles metro area. Aside from job searching, I have started my own business selling vintage cameras and watches. I have more details on that below.\nThis website is a work in progress, and I hope to update with each milestone or progress on my projects."
   }
 ]
