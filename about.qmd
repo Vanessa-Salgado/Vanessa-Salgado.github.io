@@ -2,34 +2,31 @@
 title: "About Me"
 ---
 
-## Hobbies
+##  Currently 
 
-I enjoy a concoction of hobbies at any given time but I am persistent on learning french, finding the next hidden gem at the thrift store and trying out new sports.
+I am currently on the job search for Data Analytics or Database management in an environmental or social sphere in the larger Los Angeles metro area. Aside from job searching, I have started my own business selling vintage cameras and watches. I have more details on that below.
 
-Things I enjoy to slow things down are reading and trying out new recipes. Things I learned a long they way that I am not the greatest baker.
+This website is a work in progress, and I hope to update with each milestone or progress on my projects. 
+
 
 ## Eductional Background
 
 Master of Environmental Data Science - University of California, Santa Barbara (June 2024)
 
-B.S Computer Science 2022
+University of California, Santa Barbara B.S Computer Science 2022
 
-
-##  Current Fascinations 
+## Current Fascinations
 
 ::: panel-tabset
+## Camera Business
 
-## Digital Photos
+My partner and I started this vintage camera business as a subdivision of his vintage reselling business. We resell 2000s cameras and film cameras to those who also want to capture memories through a vintage lens. You can find us on instagram [@MomentsOnDigi](https://www.instagram.com/momentsondigi/) or at local LA flea markets. 
 
-Throwing it back to the Y2K era and bringing back digital cameras. 
+## Vintage Watch Business
 
-## Foster Cat
+I love going to flea markets and I always seem to find the prettiest, daintiest watches. I would always get compliments on watches and wanted to share my love for watches at flea markets as well or on Etsy! 
 
-I'm fostering 8 year old Biscuit that has been at the ASAP Cats shelter. He's looking for a forever home. 
+## Productivity App
 
-## Step Competition
-
-Yet another way to scratch my competive itch. My friend discovered this Step Count App that lets you see how each person step counts varies on a simple leaderboard. I'm currently 
 
 :::
-

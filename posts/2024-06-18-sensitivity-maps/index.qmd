@@ -14,11 +14,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Master Project
 
-These past 6 months have been an exciting time of working with Bren Professor Dr. Joan Dudney and 3 amazing Bren Master students to understand how tree sensitivty will look in the future in response to conditions of cliamte change. Digging deep into dendrochonology, linear regression and spatial analysis has been an exciting opportunity to showcase and put an end my Master career. Our goal was to map intra-species tree sensitivty to drought and create an interactive dashboard for local stakeholders to use out tool to target conservation efforts.
+These past 6 months have been an exciting time of working with Bren Professor Dr. Joan Dudney and 3 amazing Bren Master students to understand how tree sensitivty will look in the future in response to conditions of cliamte change. Digging deep into dendrochonology, linear regression and spatial analysis has been an exciting opportunity to showcase and put an end my Master career. Our goal was to map intra-species tree sensitivity to drought and create an interactive dashboard for local stakeholders to use out tool to target conservation efforts.
 
 ## Tools Used
 
-## Tree Sensitivty Background
+## Tree Sensitivity Background
 
 Forests cover approximately 30% of Earth's land surface, absorb more carbon than all other terrestrial ecosystems, and provide trillions of dollars' worth of ecosystem services (Food and Agriculture Organization of the United Nations, 2005). However, forests are increasingly threatened by climate change-induced shifts in drought frequency and severity. As temperatures inceases, it is critical to develop effective management strategies and identify techniques to prioritize management interventions. For example, developing cutting-edge models that can identify regions within a species' range that are more vulnerable to drought can bolster restoration efforts, particularly for threatened species and species exposed to frequent droughts.
 
@@ -32,15 +32,17 @@ We hope this dashboard can act as a tool for land management partners to identif
 
 This workflow builds off the existing framework developed by our client Dr. Joan Dudney, and her colleagues Dr. Robert Heilmayr, and Dr. Frances C Moore. Original code scripts and available at the following repository: GitHub Repository - [Treeconomics](https://github.com/rheilmayr/Treeconomics)
 
-Raw data was accessed from the following public sources: 
+Raw data was accessed from the following public sources:
 
-1. Tree ring data - [International Tree Ring Data Bank](https://www.ncei.noaa.gov/products/paleoclimatology/tree-ring)
-- Date of Access: 2020-07-05 
-- Version: ITRDB v.7.22 
+1.  Tree ring data - [International Tree Ring Data Bank](https://www.ncei.noaa.gov/products/paleoclimatology/tree-ring)
 
-2. Climate data - [Terra Climate](https://www.climatologylab.org/terraclimate.html)
-- Date of Access: 2024-04-02
-- Version: Annual data (1958-present)
+-   Date of Access: 2020-07-05
+-   Version: ITRDB v.7.22
+
+2.  Climate data - [Terra Climate](https://www.climatologylab.org/terraclimate.html)
+
+-   Date of Access: 2024-04-02
+-   Version: Annual data (1958-present)
 
 ## Reinterpreting Tree Sensitivty Scales
 
@@ -50,13 +52,13 @@ Within the dashboard, we used the R {leaflet} package to plot the interactive ma
 
 ## Dashboard
 
-The Interactive Dashboard was built using R, R {Shiny} package, and {Leaflet} package. The intention of this dashboard is too choose a tree species of interest either by species code, common name or scientific name, and map the raster map of sensitivty values for each map. You can see how sensitivty ranges from tree to tree. Another feature I added was changing map tiles and transparency to better visualize the raster maps. 
+The Interactive Dashboard was built using R, R {Shiny} package, and {Leaflet} package. The intention of this dashboard is too choose a tree species of interest either by species code, common name or scientific name, and map the raster map of sensitivty values for each map. You can see how sensitivty ranges from tree to tree. Another feature I added was changing map tiles and transparency to better visualize the raster maps.
 
 Below is a short video of our dashboard.
 
 ![](Dashboard_1.png)
 
-# Project Documentation 
+# Project Documentation
 
 [Spatial Analysis Mapping Repository](https://github.com/ClimaTree/)
 
